@@ -6,9 +6,15 @@
 ===================================================== */
 
 
+
 /* =====================================================
    CONFIGURAÇÕES
 ===================================================== */
+
+const activitiesList =
+    document.getElementById(
+        "activitiesList"
+    );
 
 const PARTICIPANT_STORAGE_KEY =
     "corra_por_voce_participante";
@@ -1689,7 +1695,386 @@ async function enviarAtividade(
     }
 
 }
+/* =====================================================
+   FORMATAR DATA DA ATIVIDADE
+===================================================== */
 
+function formatActivityDate(date) {
+
+    if (!date) {
+        return "Data não informada";
+    }
+
+    /*
+     * Evita diferença de fuso ao interpretar YYYY-MM-DD.
+     */
+    const parts =
+        String(date)
+            .split("-");
+
+    if (parts.length !== 3) {
+        return date;
+    }
+
+    return (
+        parts[2] +
+        "/" +
+        parts[1] +
+        "/" +
+        parts[0]
+    );
+
+}
+
+
+/* =====================================================
+   STATUS DA ATIVIDADE
+===================================================== */
+
+function getActivityStatus(status) {
+
+    const normalized =
+        String(status || "")
+            .trim()
+            .toUpperCase();
+
+
+    if (normalized === "APROVADA") {
+
+        return {
+            text: "✓ Aprovada",
+            className: "activity-valid"
+        };
+
+    }
+
+
+    if (normalized === "REJEITADA") {
+
+        return {
+            text: "✕ Rejeitada",
+            className: "activity-rejected"
+        };
+
+    }
+
+
+    return {
+        text: "⏳ Pendente",
+        className: "activity-pending"
+    };
+
+}
+
+
+/* =====================================================
+   RENDERIZAR ATIVIDADES
+===================================================== */
+
+function renderActivities(activities) {
+
+    if (!activitiesList) {
+        return;
+    }
+
+
+    activitiesList.innerHTML = "";
+
+
+    /*
+     * Nenhuma atividade.
+     */
+    if (
+        !Array.isArray(activities) ||
+        activities.length === 0
+    ) {
+
+        const empty =
+            document.createElement(
+                "div"
+            );
+
+        empty.className =
+            "activities-empty";
+
+
+        const icon =
+            document.createElement(
+                "span"
+            );
+
+        icon.className =
+            "activities-empty-icon";
+
+        icon.textContent =
+            "🏃";
+
+
+        const title =
+            document.createElement(
+                "strong"
+            );
+
+        title.textContent =
+            "Nenhuma atividade registrada";
+
+
+        const text =
+            document.createElement(
+                "p"
+            );
+
+        text.textContent =
+            "Seus treinos aparecerão aqui após o envio.";
+
+
+        empty.append(
+            icon,
+            title,
+            text
+        );
+
+
+        activitiesList.appendChild(
+            empty
+        );
+
+        return;
+
+    }
+
+
+    activities.forEach(
+        activity => {
+
+            const status =
+                getActivityStatus(
+                    activity.status
+                );
+
+
+            const card =
+                document.createElement(
+                    "article"
+                );
+
+            card.className =
+                "activity-card";
+
+
+            /* Ícone */
+
+            const icon =
+                document.createElement(
+                    "div"
+                );
+
+            icon.className =
+                "activity-icon";
+
+            icon.textContent =
+                "🏃";
+
+
+            /* Informações */
+
+            const info =
+                document.createElement(
+                    "div"
+                );
+
+            info.className =
+                "activity-info";
+
+
+            const title =
+                document.createElement(
+                    "strong"
+                );
+
+            title.textContent =
+                "Corrida";
+
+
+            const date =
+                document.createElement(
+                    "span"
+                );
+
+            date.textContent =
+                formatActivityDate(
+                    activity.data_atividade
+                );
+
+
+            info.append(
+                title,
+                date
+            );
+
+
+            /* Distância e tempo */
+
+            const stats =
+                document.createElement(
+                    "div"
+                );
+
+            stats.className =
+                "activity-stat";
+
+
+            const distance =
+                document.createElement(
+                    "strong"
+                );
+
+            distance.textContent =
+                formatNumber(
+                    activity.distancia_km
+                ) +
+                " KM";
+
+
+            const time =
+                document.createElement(
+                    "span"
+                );
+
+            time.textContent =
+                activity.tempo ||
+                "Tempo não informado";
+
+
+            stats.append(
+                distance,
+                time
+            );
+
+
+            /* Status */
+
+            const statusElement =
+                document.createElement(
+                    "span"
+                );
+
+            statusElement.className =
+                status.className;
+
+            statusElement.textContent =
+                status.text;
+
+
+            card.append(
+                icon,
+                info,
+                stats,
+                statusElement
+            );
+
+
+            activitiesList.appendChild(
+                card
+            );
+
+        }
+    );
+
+}
+
+
+/* =====================================================
+   CARREGAR ATIVIDADES DO PARTICIPANTE
+===================================================== */
+
+async function loadParticipantActivities(
+    participant
+) {
+
+    if (!activitiesList) {
+        return;
+    }
+
+
+    /*
+     * O participante precisa possuir ID da inscrição.
+     */
+    if (!participant?.id) {
+
+        console.error(
+            "ID da inscrição não encontrado."
+        );
+
+        renderActivities([]);
+
+        return;
+
+    }
+
+
+    try {
+
+        const {
+            data,
+            error
+        } = await db
+            .from("atividades")
+            .select(`
+                id,
+                inscricao_id,
+                data_atividade,
+                distancia_km,
+                tempo,
+                status,
+                observacao_admin,
+                criado_em,
+                validado_em
+            `)
+            .eq(
+                "inscricao_id",
+                participant.id
+            )
+            .order(
+                "data_atividade",
+                {
+                    ascending: false
+                }
+            );
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        console.log(
+            "Atividades carregadas:",
+            data
+        );
+
+
+        renderActivities(
+            data || []
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "Erro carregando atividades:",
+            error
+        );
+
+
+        activitiesList.innerHTML =
+            "<p>Não foi possível carregar suas atividades.</p>";
+
+    }
+
+}
 
 /* =====================================================
    INICIALIZAÇÃO
@@ -1730,6 +2115,10 @@ function initializeParticipantPage() {
     renderParticipant(
         participant
     );
+
+    loadParticipantActivities(
+    participant
+);
 
 
     /*
