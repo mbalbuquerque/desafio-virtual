@@ -1,0 +1,2189 @@
+/* =====================================================
+   RESET
+===================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Barlow", sans-serif;
+    background: #041426;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+button,
+input,
+select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root {
+
+    --navy-950: #020d18;
+    --navy-900: #041426;
+    --navy-850: #061a30;
+    --navy-800: #08213c;
+    --navy-700: #0b2d50;
+
+    --blue: #143d73;
+    --blue-light: #2471c8;
+
+    --green: #a4d932;
+
+    --orange: #ff6a00;
+    --orange-light: #ff8a24;
+
+    --yellow: #ffd52a;
+    --red: #ff4040;
+
+    --white: #ffffff;
+    --gray-100: #edf2f7;
+    --gray-300: #c5ced8;
+    --gray-500: #8290a0;
+
+    --border: rgba(255, 255, 255, 0.09);
+
+    --shadow:
+        0 30px 80px rgba(0, 0, 0, 0.3);
+
+    --radius: 18px;
+
+    --transition: 0.25s ease;
+}
+
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+.container {
+    width: min(1180px, 90%);
+    margin: 0 auto;
+}
+
+.small-container {
+    max-width: 800px;
+}
+
+.section {
+    padding: 110px 0;
+}
+
+.section-dark {
+    background: var(--navy-950);
+}
+
+.section-mini-title {
+    color: var(--orange);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+}
+
+.section-heading {
+    max-width: 680px;
+    margin-bottom: 55px;
+}
+
+.section-heading.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-heading h2 {
+    margin-top: 10px;
+
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: clamp(2.7rem, 6vw, 4.8rem);
+    line-height: 0.95;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+}
+
+.section-heading h2 span {
+    color: var(--orange);
+}
+
+.section-heading p {
+    color: var(--gray-500);
+    line-height: 1.7;
+    margin-top: 18px;
+    max-width: 550px;
+}
+
+.center p {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.button {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    padding: 15px 25px;
+
+    border: none;
+    border-radius: 8px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--orange),
+            var(--orange-light)
+        );
+
+    color: white;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 12px 35px rgba(255, 106, 0, 0.2);
+
+    transition: var(--transition);
+}
+
+.button:hover {
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 18px 45px rgba(255, 106, 0, 0.3);
+}
+
+.button-small {
+    padding: 10px 18px;
+    font-size: 0.85rem;
+}
+
+.button-outline {
+    background: transparent;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.18);
+
+    box-shadow: none;
+}
+
+.button-outline:hover {
+    border-color: var(--orange);
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header {
+
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(2, 13, 24, 0.9);
+
+    backdrop-filter: blur(18px);
+
+    border-bottom:
+        1px solid var(--border);
+}
+
+.header-container {
+
+    height: 82px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.brand-logo {
+    width: 95px;
+    height: 72px;
+    object-fit: contain;
+}
+
+.navigation {
+    display: flex;
+    gap: 30px;
+}
+
+.navigation a {
+
+    color: var(--gray-300);
+
+    font-size: 0.85rem;
+    font-weight: 600;
+
+    transition: var(--transition);
+}
+
+.navigation a:hover {
+    color: var(--orange);
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.theme-button,
+.menu-button {
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 50%;
+
+    border:
+        1px solid var(--border);
+
+    background: transparent;
+
+    color: white;
+}
+
+.menu-button {
+    display: none;
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+
+    min-height: calc(100vh - 82px);
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+
+    background:
+
+        radial-gradient(
+            circle at 75% 40%,
+            rgba(20, 61, 115, 0.38),
+            transparent 34%
+        ),
+
+        var(--navy-900);
+}
+
+.hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.12;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,.1) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.1) 1px,
+            transparent 1px
+        );
+
+    background-size: 70px 70px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            transparent,
+            black,
+            transparent
+        );
+}
+
+.hero-container {
+
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        1.05fr 0.95fr;
+
+    gap: 70px;
+
+    align-items: center;
+
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+.eyebrow {
+
+    display: inline-flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px 15px;
+
+    border:
+        1px solid rgba(255, 106, 0, 0.35);
+
+    background:
+        rgba(255, 106, 0, 0.08);
+
+    border-radius: 50px;
+
+    color: var(--orange);
+
+    font-size: 0.72rem;
+
+    letter-spacing: 0.14em;
+
+    font-weight: 700;
+}
+
+.eyebrow-dot {
+
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: var(--orange);
+
+    box-shadow:
+        0 0 14px var(--orange);
+}
+
+.hero h1 {
+
+    margin-top: 24px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(4rem, 9vw, 7.5rem);
+
+    line-height: 0.82;
+
+    font-weight: 900;
+
+    letter-spacing: -0.02em;
+
+    text-transform: uppercase;
+}
+
+.hero h1 span {
+    display: block;
+    color: var(--orange);
+}
+
+.hero h1 strong {
+
+    display: block;
+
+    color: transparent;
+
+    -webkit-text-stroke:
+        1.5px rgba(255,255,255,.28);
+}
+
+.hero-description {
+
+    max-width: 540px;
+
+    margin-top: 28px;
+
+    color: var(--gray-300);
+
+    font-size: 1.05rem;
+
+    line-height: 1.7;
+}
+
+.hero-period {
+
+    display: flex;
+    align-items: center;
+
+    gap: 25px;
+
+    margin-top: 30px;
+}
+
+.period-item span {
+
+    display: block;
+
+    color: var(--gray-500);
+
+    font-size: 0.68rem;
+
+    letter-spacing: 0.14em;
+}
+
+.period-item strong {
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 1.7rem;
+}
+
+.period-line {
+
+    width: 55px;
+    height: 1px;
+
+    background:
+        rgba(255,255,255,.18);
+}
+
+.hero-buttons {
+
+    display: flex;
+
+    gap: 14px;
+
+    margin-top: 32px;
+
+    flex-wrap: wrap;
+}
+
+
+/* HERO VISUAL */
+
+.hero-visual {
+
+    position: relative;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 520px;
+}
+
+.hero-logo-circle {
+
+    width: min(430px, 80vw);
+    height: min(430px, 80vw);
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    background:
+
+        radial-gradient(
+            circle,
+            rgba(20,61,115,.7),
+            rgba(4,20,38,.2) 65%
+        );
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 0 100px rgba(20,61,115,.3);
+}
+
+.hero-logo-circle::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 22px;
+
+    border-radius: 50%;
+
+    border:
+        1px dashed rgba(255,106,0,.25);
+
+    animation:
+        rotate 25s linear infinite;
+}
+
+@keyframes rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.hero-logo-circle img {
+
+    width: 75%;
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.floating-card {
+
+    position: absolute;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px 18px;
+
+    background:
+        rgba(6, 26, 48, 0.9);
+
+    backdrop-filter: blur(12px);
+
+    border:
+        1px solid rgba(255,255,255,.1);
+
+    border-radius: 12px;
+
+    box-shadow: var(--shadow);
+}
+
+.floating-card span {
+    font-size: 1.6rem;
+}
+
+.floating-card small {
+
+    display: block;
+
+    color: var(--gray-500);
+
+    font-size: 0.62rem;
+}
+
+.floating-card strong {
+
+    font-size: 0.85rem;
+}
+
+.floating-card-top {
+
+    right: 0;
+    top: 90px;
+}
+
+.floating-card-bottom {
+
+    left: 0;
+    bottom: 90px;
+}
+
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+.countdown {
+
+    background: var(--orange);
+
+    padding: 25px 0;
+}
+
+.countdown-container {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+.countdown .section-mini-title {
+    color: rgba(255,255,255,.7);
+}
+
+.countdown h2 {
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    text-transform: uppercase;
+
+    font-size: 1.7rem;
+}
+
+.countdown-grid {
+
+    display: flex;
+    gap: 10px;
+}
+
+.countdown-item {
+
+    min-width: 76px;
+
+    padding: 10px;
+
+    text-align: center;
+
+    background:
+        rgba(0,0,0,.13);
+
+    border-radius: 8px;
+}
+
+.countdown-item strong {
+
+    display: block;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 1.8rem;
+}
+
+.countdown-item span {
+
+    font-size: 0.58rem;
+
+    letter-spacing: 0.1em;
+
+    opacity: 0.75;
+}
+
+
+/* =====================================================
+   CHALLENGES
+===================================================== */
+
+.challenge-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+}
+
+.challenge-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    min-height: 360px;
+
+    padding: 30px;
+
+    border-radius: var(--radius);
+
+    background: var(--navy-850);
+
+    border:
+        1px solid var(--border);
+
+    transition: var(--transition);
+}
+
+.challenge-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 100%;
+    height: 4px;
+
+    background:
+        var(--challenge-color);
+}
+
+.challenge-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    border-color:
+        var(--challenge-color);
+}
+
+.challenge-green {
+    --challenge-color: var(--green);
+}
+
+.challenge-yellow {
+    --challenge-color: var(--yellow);
+}
+
+.challenge-orange {
+    --challenge-color: var(--orange);
+}
+
+.challenge-red {
+    --challenge-color: var(--red);
+}
+
+.challenge-level {
+
+    color:
+        var(--challenge-color);
+
+    font-size: 0.68rem;
+
+    letter-spacing: 0.15em;
+
+    font-weight: 700;
+}
+
+.challenge-distance {
+
+    margin-top: 30px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 5rem;
+
+    font-weight: 900;
+
+    line-height: 1;
+}
+
+.challenge-distance span {
+
+    font-size: 1.4rem;
+
+    color: var(--gray-500);
+}
+
+.challenge-card p {
+
+    color: var(--gray-500);
+
+    line-height: 1.6;
+
+    margin-top: 20px;
+}
+
+.challenge-price {
+
+    position: absolute;
+
+    left: 30px;
+    right: 30px;
+    bottom: 28px;
+
+    padding-top: 18px;
+
+    border-top:
+        1px solid var(--border);
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.challenge-price small {
+
+    color: var(--gray-500);
+}
+
+.challenge-price strong {
+
+    color:
+        var(--challenge-color);
+
+    font-size: 1.2rem;
+}
+
+
+/* =====================================================
+   STEPS
+===================================================== */
+
+.steps-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 16px;
+}
+
+.step-card {
+
+    position: relative;
+
+    padding: 30px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    background: var(--navy-900);
+}
+
+.step-number {
+
+    position: absolute;
+
+    top: 20px;
+    right: 22px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 2rem;
+
+    color:
+        rgba(255,255,255,.08);
+
+    font-weight: 900;
+}
+
+.step-icon {
+
+    font-size: 2.2rem;
+
+    margin-bottom: 22px;
+}
+
+.step-card h3 {
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    text-transform: uppercase;
+
+    font-size: 1.5rem;
+}
+
+.step-card p {
+
+    margin-top: 10px;
+
+    color: var(--gray-500);
+
+    line-height: 1.6;
+
+    font-size: 0.9rem;
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress-section {
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            rgba(20,61,115,.2),
+            transparent 45%
+        ),
+
+        var(--navy-900);
+}
+
+.search-card {
+
+    display: flex;
+
+    gap: 12px;
+
+    padding: 12px;
+
+    background: var(--navy-850);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 12px;
+}
+
+.search-input {
+
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 0 15px;
+
+    background: var(--navy-950);
+
+    border-radius: 8px;
+}
+
+.search-input input {
+
+    flex: 1;
+
+    padding: 15px 0;
+
+    background: transparent;
+
+    border: none;
+
+    outline: none;
+
+    color: white;
+}
+
+.progress-result {
+
+    margin-top: 20px;
+}
+
+
+/* =====================================================
+   PROGRESS CARD
+===================================================== */
+
+.progress-card {
+
+    padding: 32px;
+
+    background: var(--navy-850);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+}
+
+
+.progress-header {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.progress-header small {
+
+    color: var(--gray-500);
+
+    font-size: 0.65rem;
+
+    letter-spacing: 0.12em;
+}
+
+
+.progress-header h3 {
+
+    margin-top: 3px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 2rem;
+
+    text-transform: uppercase;
+}
+
+
+.progress-modality {
+
+    padding: 8px 14px;
+
+    background:
+        rgba(255,106,0,.12);
+
+    border:
+        1px solid rgba(255,106,0,.25);
+
+    border-radius: 30px;
+
+    color: var(--orange);
+
+    font-weight: 700;
+}
+
+
+.progress-number {
+
+    margin-top: 35px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 4rem;
+
+    line-height: 1;
+
+    font-weight: 900;
+
+    color: var(--orange);
+}
+
+
+.progress-bar {
+
+    height: 10px;
+
+    margin-top: 15px;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background: var(--navy-950);
+}
+
+
+.progress-bar-value {
+
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--orange),
+            var(--orange-light)
+        );
+
+    transition:
+        width 0.8s ease;
+}
+
+
+.progress-stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-top: 30px;
+}
+
+
+.progress-stats div {
+
+    padding: 18px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    background:
+        rgba(0,0,0,.08);
+}
+
+
+.progress-stats small {
+
+    display: block;
+
+    color: var(--gray-500);
+
+    font-size: 0.62rem;
+
+    margin-bottom: 6px;
+}
+
+
+.progress-stats strong {
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 1.5rem;
+}
+
+
+.strava-preview {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-top: 30px;
+
+    padding: 22px;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(252,76,2,.12),
+            rgba(252,76,2,.03)
+        );
+
+    border:
+        1px solid rgba(252,76,2,.25);
+}
+
+
+.strava-preview strong {
+
+    color: #fc4c02;
+
+    letter-spacing: 0.1em;
+}
+
+
+.strava-preview p {
+
+    margin-top: 5px;
+
+    color: var(--gray-500);
+
+    font-size: 0.8rem;
+}
+
+
+.strava-button {
+
+    flex-shrink: 0;
+
+    padding: 11px 18px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #fc4c02;
+
+    color: white;
+
+    font-weight: 700;
+
+    opacity: 0.55;
+
+    cursor: not-allowed;
+}
+
+
+@media (max-width: 600px) {
+
+    .progress-stats {
+
+        grid-template-columns: 1fr;
+
+    }
+
+
+    .strava-preview {
+
+        flex-direction: column;
+
+        align-items: stretch;
+
+    }
+
+}
+
+/* =====================================================
+   RANKING
+===================================================== */
+
+.ranking-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+}
+
+.empty-message {
+
+    grid-column: 1 / -1;
+
+    padding: 45px;
+
+    text-align: center;
+
+    color: var(--gray-500);
+
+    border:
+        1px dashed var(--border);
+
+    border-radius: 12px;
+}
+
+
+/* =====================================================
+   REGISTRATION
+===================================================== */
+
+.registration-section {
+
+    background:
+
+        radial-gradient(
+            circle at 15% 50%,
+            rgba(255,106,0,.12),
+            transparent 35%
+        ),
+
+        var(--navy-900);
+}
+
+.registration-container {
+
+    display: grid;
+
+    grid-template-columns:
+        0.9fr 1.1fr;
+
+    gap: 80px;
+
+    align-items: center;
+}
+
+.registration-info h2 {
+
+    margin-top: 10px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(3rem,6vw,5rem);
+
+    line-height: 0.95;
+
+    text-transform: uppercase;
+}
+
+.registration-info h2 span {
+
+    color: var(--orange);
+}
+
+.registration-info > p {
+
+    margin: 20px 0 35px;
+
+    color: var(--gray-500);
+
+    line-height: 1.7;
+}
+
+.registration-detail {
+
+    display: flex;
+
+    gap: 15px;
+
+    align-items: center;
+
+    margin-top: 20px;
+}
+
+.registration-detail > span {
+
+    width: 45px;
+    height: 45px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(255,106,0,.1);
+
+    border:
+        1px solid rgba(255,106,0,.2);
+
+    border-radius: 10px;
+}
+
+.registration-detail small {
+
+    display: block;
+
+    color: var(--gray-500);
+
+    font-size: 0.65rem;
+}
+
+.registration-form {
+
+    padding: 38px;
+
+    background: var(--navy-850);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: var(--radius);
+
+    box-shadow: var(--shadow);
+}
+
+.registration-form h3 {
+
+    margin-bottom: 25px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 2rem;
+
+    text-transform: uppercase;
+}
+
+.form-row {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 15px;
+}
+
+.form-group {
+
+    margin-bottom: 17px;
+}
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--gray-300);
+
+    font-size: 0.76rem;
+
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+
+    width: 100%;
+
+    padding: 14px 15px;
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+
+    background: var(--navy-950);
+
+    color: white;
+
+    outline: none;
+
+    transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+
+    border-color: var(--orange);
+}
+
+.form-button {
+
+    width: 100%;
+
+    margin-top: 10px;
+}
+
+.form-message {
+
+    margin-top: 15px;
+
+    font-size: 0.85rem;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.footer {
+
+    padding: 40px 0;
+
+    background: var(--navy-950);
+
+    border-top:
+        1px solid var(--border);
+}
+
+.footer-container {
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 25px;
+}
+
+.footer img {
+
+    width: 80px;
+}
+
+.footer p,
+.footer > span {
+
+    color: var(--gray-500);
+}
+
+
+/* =====================================================
+   LIGHT MODE
+===================================================== */
+
+body.light-mode {
+
+    --navy-950: #edf2f5;
+    --navy-900: #f7f9fa;
+    --navy-850: #ffffff;
+    --navy-800: #eef2f4;
+
+    --gray-300: #455466;
+    --gray-500: #687787;
+
+    --border:
+        rgba(5, 24, 43, 0.1);
+
+    color: #071d33;
+}
+
+body.light-mode .header {
+
+    background:
+        rgba(255,255,255,.92);
+}
+
+body.light-mode .theme-button,
+body.light-mode .menu-button {
+
+    color: #071d33;
+}
+
+body.light-mode .search-input input,
+body.light-mode .form-group input,
+body.light-mode .form-group select {
+
+    color: #071d33;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .challenge-grid,
+    .steps-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+    .hero-container {
+
+        grid-template-columns: 1fr;
+
+        text-align: center;
+    }
+
+    .hero-description {
+
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-period,
+    .hero-buttons {
+
+        justify-content: center;
+    }
+
+    .hero-visual {
+
+        min-height: 430px;
+    }
+
+    .registration-container {
+
+        grid-template-columns: 1fr;
+
+        gap: 50px;
+    }
+
+    .navigation {
+
+        position: absolute;
+
+        top: 82px;
+        left: 0;
+        right: 0;
+
+        display: none;
+
+        flex-direction: column;
+
+        padding: 25px 5%;
+
+        background: var(--navy-950);
+
+        border-bottom:
+            1px solid var(--border);
+    }
+
+    .navigation.active {
+        display: flex;
+    }
+
+    .menu-button {
+        display: block;
+    }
+
+}
+
+
+@media (max-width: 700px) {
+
+    .section {
+        padding: 75px 0;
+    }
+
+    .header-actions .button-small {
+        display: none;
+    }
+
+    .hero {
+
+        min-height: auto;
+    }
+
+    .hero-container {
+
+        padding-top: 70px;
+    }
+
+    .hero h1 {
+
+        font-size:
+            clamp(3.7rem,18vw,6rem);
+    }
+
+    .hero-visual {
+
+        min-height: 350px;
+    }
+
+    .hero-logo-circle {
+
+        width: 310px;
+        height: 310px;
+    }
+
+    .floating-card {
+
+        padding: 10px 13px;
+    }
+
+    .countdown-container {
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+    .countdown-grid {
+
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    .countdown-item {
+
+        min-width: 60px;
+    }
+
+    .challenge-grid,
+    .steps-grid,
+    .ranking-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+
+        grid-template-columns: 1fr;
+    }
+
+    .registration-form {
+
+        padding: 25px 20px;
+    }
+
+    .search-card {
+
+        flex-direction: column;
+    }
+
+    .search-input {
+
+        min-height: 55px;
+    }
+
+    .footer-container {
+
+        flex-direction: column;
+
+        text-align: center;
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .hero-period {
+
+        gap: 15px;
+    }
+
+    .period-line {
+
+        width: 30px;
+    }
+
+    .countdown-grid {
+
+        gap: 5px;
+    }
+
+    .countdown-item {
+
+        min-width: 54px;
+
+        padding:
+            8px 5px;
+    }
+
+}
+
+/* =====================================================
+   PARTICIPANTES
+===================================================== */
+
+.participant-counter {
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+
+.participant-counter strong {
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 2.2rem;
+
+    color: var(--orange);
+}
+
+
+.participant-counter span {
+
+    max-width: 160px;
+
+    color: var(--gray-500);
+
+    font-size: 0.78rem;
+
+    line-height: 1.3;
+}
+
+.ranking-grid {
+
+    grid-template-columns: 1fr;
+}
+
+
+.ranking-card {
+
+    display: grid;
+
+    grid-template-columns:
+        65px 1fr auto;
+
+    align-items: center;
+
+    gap: 20px;
+
+    padding: 18px 22px;
+
+    background: var(--navy-900);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 12px;
+
+    transition: var(--transition);
+}
+
+
+.ranking-card:hover {
+
+    transform: translateX(5px);
+
+    border-color:
+        rgba(255,106,0,.35);
+
+}
+
+
+.ranking-position {
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 1.7rem;
+
+    font-weight: 900;
+
+    text-align: center;
+}
+
+
+.ranking-person strong {
+
+    display: block;
+
+    font-size: 0.95rem;
+}
+
+
+.ranking-person small {
+
+    color: var(--gray-500);
+}
+
+
+.ranking-km {
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 1.7rem;
+
+    font-weight: 900;
+
+    color: var(--orange);
+}
+
+
+.ranking-km span {
+
+    font-size: 0.7rem;
+
+    color: var(--gray-500);
+}
+
+/* =====================================================
+   CARD DE PAGAMENTO PIX
+===================================================== */
+
+.pix-card {
+    width: calc(100% - 40px);
+    max-width: 1120px;
+
+    margin: 32px auto;
+    padding: 32px;
+
+    box-sizing: border-box;
+
+    background: #061f31;
+
+    border: 1px solid
+        rgba(255, 107, 0, 0.45);
+
+    border-radius: 16px;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   LABEL
+===================================================== */
+
+.pix-label {
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #ff6b00;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+
+/* =====================================================
+   TÍTULO / VALOR
+===================================================== */
+
+.pix-card h3 {
+    margin: 0 0 10px;
+
+    color: #ffffff;
+
+    font-size: 24px;
+    font-weight: 800;
+
+    line-height: 1.2;
+}
+
+
+/* =====================================================
+   DESCRIÇÃO
+===================================================== */
+
+.pix-card > p {
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    color: #9db4c4;
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   BOX DA CHAVE PIX
+===================================================== */
+
+.pix-key-box {
+    width: 100%;
+    max-width: 650px;
+
+    margin: 22px auto 14px;
+    padding: 16px 20px;
+
+    box-sizing: border-box;
+
+    background: #021522;
+
+    border: 1px solid
+        rgba(255, 255, 255, 0.07);
+
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   TEXTO "CHAVE PIX"
+===================================================== */
+
+.pix-key-box small {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #7995a8;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+/* =====================================================
+   CHAVE PIX
+===================================================== */
+
+.pix-key-box strong {
+    display: block;
+
+    color: #ffffff;
+
+    font-size: 15px;
+    font-weight: 800;
+
+    line-height: 1.4;
+
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+
+/* =====================================================
+   BOTÃO COPIAR PIX
+===================================================== */
+
+.pix-copy-button {
+    display: block;
+
+    width: 100%;
+    max-width: 650px;
+
+    margin: 0 auto;
+
+    padding: 15px 20px;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: #ff6b00;
+
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* =====================================================
+   HOVER
+===================================================== */
+
+.pix-copy-button:hover {
+    background: #ff7b20;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px
+        rgba(255, 107, 0, 0.20);
+}
+
+
+/* =====================================================
+   CLIQUE
+===================================================== */
+
+.pix-copy-button:active {
+    transform: translateY(0);
+}
+
+
+/* =====================================================
+   FOCO / ACESSIBILIDADE
+===================================================== */
+
+.pix-copy-button:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 3px;
+}
+
+
+/* =====================================================
+   MENSAGEM "CHAVE COPIADA"
+===================================================== */
+
+.pix-copy-message {
+    min-height: 20px;
+
+    margin: 12px auto 0 !important;
+
+    color: #55d67a !important;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-align: center;
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .pix-card {
+        width: calc(100% - 32px);
+
+        margin: 28px auto;
+
+        padding: 28px 24px;
+    }
+
+}
+
+
+/* =====================================================
+   CELULAR
+===================================================== */
+
+@media (max-width: 600px) {
+
+    .pix-card {
+        width: calc(100% - 24px);
+
+        margin: 24px auto;
+
+        padding: 24px 16px;
+
+        border-radius: 14px;
+    }
+
+
+    .pix-label {
+        font-size: 10px;
+    }
+
+
+    .pix-card h3 {
+        font-size: 21px;
+    }
+
+
+    .pix-card > p {
+        font-size: 13px;
+    }
+
+
+    .pix-key-box {
+        margin-top: 20px;
+
+        padding: 15px 12px;
+    }
+
+
+    .pix-key-box strong {
+        font-size: 14px;
+    }
+
+
+    .pix-copy-button {
+        padding: 14px 16px;
+
+        font-size: 13px;
+    }
+
+}

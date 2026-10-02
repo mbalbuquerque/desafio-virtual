@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07192b"
+    >
+
+    <meta
+        name="description"
+        content="Acesse sua área do participante e acompanhe sua evolução no Desafio Corra Por Você."
+    >
+
+    <title>
+        Área do Participante | Corra Por Você
+    </title>
+
+    <!-- CSS PRINCIPAL -->
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css"
+    >
+
+    <!-- CSS DA ÁREA DE ACESSO -->
+    <link
+        rel="stylesheet"
+        href="assets/css/acesso.css"
+    >
+
+</head>
+
+
+<body class="access-page">
+
+    <main class="access-container">
+
+
+        <!-- =====================================
+             LOGO
+        ====================================== -->
+
+        <a
+            href="index.html"
+            class="access-logo"
+            aria-label="Voltar para o início"
+        >
+
+            <img
+                src="assets/images/logopng.png"
+                alt="Corra Por Você"
+            >
+
+        </a>
+
+
+        <!-- =====================================
+             CARD DE ACESSO
+        ====================================== -->
+
+        <section class="access-card">
+
+
+            <div class="access-step">
+
+
+                <span class="access-eyebrow">
+                    ÁREA DO PARTICIPANTE
+                </span>
+
+
+                <h1>
+                    Acesse seu desafio
+                </h1>
+
+
+                <p class="access-description">
+                    Informe o mesmo e-mail utilizado
+                    durante sua inscrição.
+                </p>
+
+
+                <!-- =====================================
+                     FORMULÁRIO
+                ====================================== -->
+
+                <form
+                    id="accessForm"
+                    class="access-form"
+                >
+
+
+                    <div class="form-group">
+
+                        <label for="accessEmail">
+                            E-mail da inscrição
+                        </label>
+
+
+                        <input
+                            type="email"
+                            id="accessEmail"
+                            name="email"
+                            placeholder="seuemail@gmail.com"
+                            autocomplete="email"
+                            inputmode="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <button
+                        id="accessButton"
+                        class="access-primary-button"
+                        type="submit"
+                    >
+
+                        <span class="button-text">
+                            Acessar meu desafio
+                        </span>
+
+                        <span aria-hidden="true">
+                            →
+                        </span>
+
+                    </button>
+
+
+                </form>
+
+
+                <!-- =====================================
+                     MENSAGENS
+                ====================================== -->
+
+                <div
+                    id="accessMessage"
+                    class="access-message"
+                    role="status"
+                    aria-live="polite"
+                ></div>
+
+
+                <!-- =====================================
+                     INFORMAÇÃO
+                ====================================== -->
+
+                <div class="access-help">
+
+                    <span aria-hidden="true">
+                        🏃
+                    </span>
+
+                    <p>
+                        Consulte sua evolução, distância
+                        percorrida, meta e desempenho
+                        no desafio.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =====================================
+             SEGURANÇA
+        ====================================== -->
+
+        <div class="access-security">
+
+            <span aria-hidden="true">
+                🔒
+            </span>
+
+            <p>
+                Área de consulta.
+                Seus resultados oficiais são
+                atualizados pelo sistema.
+            </p>
+
+        </div>
+
+
+        <!-- =====================================
+             VOLTAR
+        ====================================== -->
+
+        <a
+            href="index.html"
+            class="return-home"
+        >
+            ← Voltar para o site
+        </a>
+
+
+    </main>
+
+
+    <!-- =====================================
+         SUPABASE
+    ====================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+    <script
+        src="assets/js/supabase.js"
+    ></script>
+
+
+    <!-- =====================================
+         ACESSO
+    ====================================== -->
+
+    <script
+        src="assets/js/acesso.js"
+    ></script>
+
+
+</body>
+
+</html>

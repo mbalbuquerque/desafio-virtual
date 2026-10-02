@@ -1,0 +1,523 @@
+/* =====================================================
+   CORRA POR VOCÊ
+   ACESSO DO PARTICIPANTE
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+
+.access-page {
+
+    min-height: 100vh;
+
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(255, 115, 0, .12),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at bottom left,
+            rgba(20, 91, 150, .15),
+            transparent 35%
+        ),
+        #06182a;
+
+    color: #ffffff;
+
+}
+
+
+.access-container {
+
+    width: min(
+        100% - 32px,
+        500px
+    );
+
+    padding: 45px 0;
+
+}
+
+
+.access-logo {
+
+    width: fit-content;
+
+    margin:
+        0 auto
+        30px;
+
+    display: block;
+
+}
+
+
+.access-logo img {
+
+    width: 105px;
+    height: 80px;
+
+    object-fit: contain;
+
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.access-card {
+
+    padding:
+        clamp(
+            28px,
+            6vw,
+            42px
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius: 26px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(12, 36, 59, .98),
+            rgba(7, 27, 46, .98)
+        );
+
+    box-shadow:
+        0 25px 70px
+        rgba(0,0,0,.25);
+
+}
+
+
+.access-step[hidden] {
+    display: none;
+}
+
+
+.access-eyebrow {
+
+    display: block;
+
+    margin-bottom: 10px;
+
+    color: #ff7300;
+
+    font-size: .72rem;
+    font-weight: 900;
+
+    letter-spacing: .14em;
+
+}
+
+
+.access-card h1 {
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            2rem,
+            7vw,
+            2.8rem
+        );
+
+    line-height: 1.05;
+
+}
+
+
+.access-description {
+
+    margin:
+        15px 0
+        30px;
+
+    color: #9aa9b7;
+
+    line-height: 1.6;
+
+}
+
+
+.access-description strong {
+
+    color: #ffffff;
+
+    overflow-wrap: anywhere;
+
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.access-card label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #d5dde4;
+
+    font-size: .82rem;
+
+    font-weight: 700;
+
+}
+
+
+.access-card input {
+
+    width: 100%;
+    min-height: 55px;
+
+    padding: 0 16px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    border-radius: 13px;
+
+    outline: none;
+
+    background: #06182a;
+
+    color: #ffffff;
+
+    font-size: 1rem;
+
+    transition:
+        border-color .2s,
+        box-shadow .2s;
+
+}
+
+
+.access-card input:focus {
+
+    border-color: #ff7300;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(255,115,0,.12);
+
+}
+
+
+.access-card input::placeholder {
+    color: #5f7385;
+}
+
+
+/* =====================================================
+   OTP
+===================================================== */
+
+.code-input {
+
+    text-align: center;
+
+    font-size: 1.8rem !important;
+
+    font-weight: 900;
+
+    letter-spacing: .35em;
+
+}
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
+.access-primary-button {
+
+    width: 100%;
+    min-height: 55px;
+
+    margin-top: 18px;
+
+    padding: 0 20px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 12px;
+
+    border: 0;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #f15b00,
+            #ff8300
+        );
+
+    color: #ffffff;
+
+    font-size: .9rem;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    transition:
+        transform .2s,
+        opacity .2s;
+
+}
+
+
+.access-primary-button:hover {
+    transform: translateY(-1px);
+}
+
+
+.access-primary-button:disabled {
+
+    cursor: not-allowed;
+
+    opacity: .6;
+
+    transform: none;
+
+}
+
+
+/* =====================================================
+   HELP
+===================================================== */
+
+.access-help {
+
+    margin-top: 25px;
+
+    padding: 16px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    border-radius: 14px;
+
+    background:
+        rgba(255,255,255,.035);
+
+}
+
+
+.access-help p {
+
+    margin: 0;
+
+    color: #8395a5;
+
+    font-size: .78rem;
+
+    line-height: 1.5;
+
+}
+
+
+/* =====================================================
+   BACK
+===================================================== */
+
+.back-button {
+
+    margin-bottom: 25px;
+
+    padding: 0;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #8ea0b0;
+
+    font-size: .8rem;
+
+    cursor: pointer;
+
+}
+
+
+.resend-button {
+
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 10px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #9babb9;
+
+    font-size: .78rem;
+
+    cursor: pointer;
+
+}
+
+
+.resend-button:hover {
+    color: #ff7300;
+}
+
+
+/* =====================================================
+   MESSAGE
+===================================================== */
+
+.access-message {
+
+    min-height: 20px;
+
+    margin-top: 20px;
+
+    text-align: center;
+
+    font-size: .8rem;
+
+    line-height: 1.5;
+
+}
+
+
+.access-message.success {
+    color: #72db7b;
+}
+
+
+.access-message.error {
+    color: #ff7777;
+}
+
+
+/* =====================================================
+   SECURITY
+===================================================== */
+
+.access-security {
+
+    margin-top: 22px;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 9px;
+
+    color: #6e8293;
+
+}
+
+
+.access-security p {
+
+    max-width: 330px;
+
+    margin: 0;
+
+    font-size: .72rem;
+
+    line-height: 1.5;
+
+}
+
+
+.return-home {
+
+    display: block;
+
+    width: fit-content;
+
+    margin:
+        28px auto 0;
+
+    color: #8295a5;
+
+    text-decoration: none;
+
+    font-size: .78rem;
+
+}
+
+
+.return-home:hover {
+    color: #ff7300;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 520px) {
+
+    .access-container {
+
+        width:
+            min(
+                100% - 22px,
+                500px
+            );
+
+        padding:
+            24px 0
+            35px;
+
+    }
+
+
+    .access-logo {
+
+        margin-bottom: 18px;
+
+    }
+
+
+    .access-logo img {
+
+        width: 88px;
+        height: 67px;
+
+    }
+
+
+    .access-card {
+
+        padding:
+            28px 20px;
+
+        border-radius: 20px;
+
+    }
+
+}

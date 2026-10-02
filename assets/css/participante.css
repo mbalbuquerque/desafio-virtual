@@ -1,0 +1,1262 @@
+/* =====================================================
+   CORRA POR VOCÊ
+   ÁREA DO PARTICIPANTE
+===================================================== */
+
+.participant-page {
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(255, 106, 0, 0.08),
+            transparent 28%
+        ),
+        #06182a;
+
+    color: #ffffff;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.participant-header {
+    min-height: 82px;
+    padding: 12px clamp(20px, 5vw, 72px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
+
+    background:
+        rgba(6, 24, 42, .94);
+
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+
+.participant-brand img {
+    width: 74px;
+    height: 58px;
+    object-fit: contain;
+}
+
+
+.participant-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.connection-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: .8rem;
+    font-weight: 700;
+    color: #b9c5d0;
+}
+
+
+.connection-status > span {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #62d36b;
+}
+
+
+.logout-button {
+    min-height: 42px;
+    padding: 0 18px;
+
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,.15);
+
+    background: transparent;
+    color: #fff;
+
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+.participant-main {
+    width: min(1180px, calc(100% - 40px));
+    margin: 0 auto;
+    padding: 54px 0 70px;
+}
+
+
+/* =====================================================
+   WELCOME
+===================================================== */
+
+.participant-welcome {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 32px;
+
+    margin-bottom: 38px;
+}
+
+
+.eyebrow {
+    display: block;
+    margin-bottom: 8px;
+
+    color: #ff7300;
+
+    font-size: .74rem;
+    font-weight: 900;
+    letter-spacing: .14em;
+}
+
+
+.participant-welcome h1 {
+    margin: 0;
+
+    font-size:
+        clamp(2rem, 5vw, 3.5rem);
+
+    line-height: 1;
+}
+
+
+.participant-welcome p {
+    margin: 14px 0 0;
+    color: #9eacba;
+}
+
+
+.challenge-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 14px 18px;
+
+    border:
+        1px solid rgba(255,255,255,.09);
+
+    border-radius: 16px;
+
+    background: #0b2137;
+}
+
+
+.status-dot {
+    width: 11px;
+    height: 11px;
+
+    border-radius: 50%;
+    background: #65d46e;
+}
+
+
+.challenge-status small {
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #8192a3;
+
+    font-size: .65rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+
+
+.challenge-status strong {
+    font-size: .9rem;
+}
+
+
+/* =====================================================
+   SUMMARY
+===================================================== */
+
+.participant-summary {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(180px, 1fr)
+        minmax(180px, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 64px;
+}
+
+
+.summary-card {
+    padding: 28px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0b2137,
+            #081c30
+        );
+}
+
+
+.main-progress-card {
+    border-color:
+        rgba(255,115,0,.28);
+}
+
+
+.summary-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+
+.summary-card-header h2 {
+    margin: 0;
+    font-size: 1.7rem;
+}
+
+
+.summary-icon {
+    font-size: 1.8rem;
+}
+
+
+.participant-progress-number {
+    margin: 30px 0 16px;
+
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+
+.participant-progress-number strong {
+    font-size:
+        clamp(2.5rem, 5vw, 4.3rem);
+
+    line-height: 1;
+}
+
+
+.participant-progress-number span {
+    color: #8495a5;
+}
+
+
+.participant-progress-bar {
+    height: 10px;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background: #122d45;
+}
+
+
+.participant-progress-value {
+    height: 100%;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff5b00,
+            #ff8a00
+        );
+}
+
+
+.participant-progress-footer {
+    margin-top: 14px;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+
+    color: #8495a5;
+    font-size: .82rem;
+}
+
+
+.participant-progress-footer strong {
+    color: #ffffff;
+}
+
+
+.summary-label {
+    color: #8495a5;
+
+    font-size: .72rem;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+
+
+.summary-value {
+    display: block;
+
+    margin-top: 30px;
+
+    font-size: 3rem;
+    line-height: 1;
+}
+
+
+.summary-unit {
+    display: block;
+
+    margin-top: 5px;
+
+    color: #ff7300;
+    font-weight: 800;
+}
+
+
+.summary-card p {
+    margin: 24px 0 0;
+
+    color: #7e90a0;
+    font-size: .8rem;
+}
+
+
+/* =====================================================
+   SECTIONS
+===================================================== */
+
+.participant-section {
+    margin-bottom: 64px;
+}
+
+
+.section-heading {
+    margin-bottom: 24px;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+
+.section-heading h2 {
+    margin: 0;
+
+    font-size:
+        clamp(1.6rem, 3vw, 2.3rem);
+}
+
+
+/* =====================================================
+   PACE
+===================================================== */
+
+.pace-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 14px;
+}
+
+
+.pace-card {
+    padding: 22px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius: 17px;
+
+    background: #0a2035;
+}
+
+
+.pace-card small {
+    display: block;
+
+    min-height: 30px;
+
+    color: #7f91a1;
+
+    font-size: .66rem;
+    font-weight: 800;
+    letter-spacing: .08em;
+}
+
+
+.pace-card strong {
+    display: block;
+
+    margin-top: 14px;
+
+    font-size: 1.65rem;
+}
+
+
+.performance-insight {
+    margin-top: 18px;
+    padding: 26px;
+
+    display: flex;
+    gap: 20px;
+
+    border:
+        1px solid rgba(255,115,0,.25);
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,115,0,.09),
+            rgba(255,115,0,.02)
+        );
+}
+
+
+.insight-icon {
+    font-size: 1.8rem;
+}
+
+
+.performance-insight h3 {
+    margin: 0 0 8px;
+}
+
+
+.performance-insight p {
+    margin: 0;
+
+    max-width: 800px;
+
+    color: #9cabb8;
+    line-height: 1.7;
+}
+
+
+/* =====================================================
+   ACTIVITIES
+===================================================== */
+
+.strava-badge {
+    color: #fc5200;
+    font-size: .8rem;
+    font-weight: 900;
+}
+
+
+.activities-list {
+    display: grid;
+    gap: 10px;
+}
+
+
+.activity-card {
+    padding: 18px 20px;
+
+    display: grid;
+
+    grid-template-columns:
+        auto
+        minmax(0, 1fr)
+        auto
+        auto;
+
+    align-items: center;
+    gap: 20px;
+
+    border:
+        1px solid rgba(255,255,255,.07);
+
+    border-radius: 16px;
+
+    background: #0a2035;
+}
+
+
+.activity-icon {
+    width: 45px;
+    height: 45px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+
+    background:
+        rgba(255,115,0,.1);
+}
+
+
+.activity-info {
+    min-width: 0;
+}
+
+
+.activity-info strong,
+.activity-info span,
+.activity-stat strong,
+.activity-stat span {
+    display: block;
+}
+
+
+.activity-info span,
+.activity-stat span {
+    margin-top: 4px;
+
+    color: #7f91a1;
+    font-size: .78rem;
+}
+
+
+.activity-stat {
+    text-align: right;
+}
+
+
+.activity-valid {
+    padding: 7px 11px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(81,190,95,.1);
+
+    color: #6ed778;
+
+    font-size: .7rem;
+    font-weight: 800;
+}
+
+
+/* =====================================================
+   TIPS
+===================================================== */
+
+.tips-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 16px;
+}
+
+
+.tip-card {
+    padding: 26px;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius: 20px;
+
+    background: #0a2035;
+}
+
+
+.tip-icon {
+    display: block;
+
+    margin-bottom: 24px;
+
+    font-size: 1.8rem;
+}
+
+
+.tip-card h3 {
+    margin: 0 0 10px;
+}
+
+
+.tip-card p {
+    margin: 0;
+
+    color: #91a0ae;
+    line-height: 1.7;
+    font-size: .88rem;
+}
+
+
+/* =====================================================
+   SHARE
+===================================================== */
+
+.share-section {
+    padding: 34px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f15b00,
+            #ff8400
+        );
+}
+
+
+.share-section .eyebrow {
+    color: #07192b;
+}
+
+
+.share-section h2 {
+    max-width: 600px;
+
+    margin: 0;
+
+    font-size:
+        clamp(1.7rem, 4vw, 2.6rem);
+}
+
+
+.share-section p {
+    margin: 12px 0 0;
+
+    color: rgba(255,255,255,.85);
+}
+
+
+.share-button {
+    min-height: 52px;
+
+    padding: 0 22px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    border: 0;
+    border-radius: 999px;
+
+    background: #07192b;
+    color: #ffffff;
+
+    font-weight: 800;
+
+    cursor: pointer;
+}
+
+
+.health-notice {
+    max-width: 800px;
+
+    margin:
+        24px auto 0;
+
+    text-align: center;
+
+    color: #66798a;
+    font-size: .72rem;
+    line-height: 1.6;
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 900px) {
+
+    .participant-summary {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .main-progress-card {
+        grid-column:
+            1 / -1;
+    }
+
+
+    .pace-grid {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .tips-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 620px) {
+
+    .participant-main {
+        width:
+            min(
+                100% - 28px,
+                1180px
+            );
+
+        padding-top: 34px;
+    }
+
+
+    .participant-header {
+        padding:
+            10px 14px;
+    }
+
+
+    .connection-status {
+        display: none;
+    }
+
+
+    .participant-welcome {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+
+    .challenge-status {
+        width: 100%;
+    }
+
+
+    .participant-summary {
+        grid-template-columns: 1fr;
+    }
+
+
+    .main-progress-card {
+        grid-column: auto;
+    }
+
+
+    .pace-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    .participant-progress-footer {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+
+    .activity-card {
+        grid-template-columns:
+            auto
+            minmax(0, 1fr)
+            auto;
+    }
+
+
+    .activity-valid {
+        grid-column:
+            2 / -1;
+
+        justify-self: start;
+    }
+
+
+    .share-section {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+
+    .share-button {
+        justify-content: center;
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .pace-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* =====================================================
+   STRAVA - CONEXÃO
+===================================================== */
+
+.strava-connect-button {
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    padding: 8px 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.05);
+
+    color: #ffffff;
+
+    font: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.strava-connect-button:hover {
+
+    background: rgba(255, 255, 255, 0.10);
+
+    border-color: rgba(255, 255, 255, 0.25);
+
+    transform: translateY(-1px);
+
+}
+
+
+.strava-connect-button:disabled {
+
+    cursor: wait;
+    opacity: 0.7;
+
+}
+
+
+.strava-dot {
+
+    width: 9px;
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #fc5200;
+
+    flex-shrink: 0;
+
+}
+
+
+/* Quando a conta estiver realmente conectada */
+
+.strava-connect-button.connected {
+
+    cursor: default;
+
+}
+
+
+.strava-connect-button.connected
+.strava-dot {
+
+    background: #2bb560;
+
+}
+
+/* =====================================================
+   MODAL REGISTRAR ATIVIDADE
+===================================================== */
+
+.modal-atividade {
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+}
+
+.modal-atividade.ativo {
+    display: flex;
+}
+
+.modal-atividade-overlay {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 15, 31, 0.82);
+    backdrop-filter: blur(5px);
+}
+
+.modal-atividade-card {
+    position: relative;
+
+    z-index: 1;
+
+    width: 100%;
+    max-width: 470px;
+
+    max-height: 90vh;
+    overflow-y: auto;
+
+    background: #071e3d;
+
+    border: 1px solid rgba(255, 102, 0, 0.35);
+    border-radius: 24px;
+
+    padding: 28px;
+
+    box-shadow:
+        0 25px 70px rgba(0, 0, 0, 0.45);
+}
+
+.modal-atividade-fechar {
+    position: absolute;
+
+    top: 16px;
+    right: 18px;
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255,255,255,.15);
+
+    background: transparent;
+    color: #fff;
+
+    font-size: 25px;
+
+    cursor: pointer;
+}
+
+.modal-atividade-header {
+    display: flex;
+    align-items: center;
+
+    gap: 14px;
+
+    margin-bottom: 18px;
+}
+
+.modal-atividade-icone {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    border-radius: 14px;
+
+    background: rgba(255, 102, 0, .12);
+
+    font-size: 24px;
+}
+
+.modal-atividade-header small {
+    color: #ff6600;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+.modal-atividade-header h2 {
+    margin: 3px 0 0;
+
+    color: #fff;
+
+    font-size: 24px;
+}
+
+.modal-atividade-texto {
+    color: #a9bdd1;
+
+    line-height: 1.5;
+
+    margin-bottom: 24px;
+}
+
+
+/* CAMPOS */
+
+.campo-atividade {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+}
+
+.campo-atividade label {
+    color: #d8e4ef;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.campo-atividade input:not([type="file"]) {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 15px;
+
+    background: #001f33;
+
+    border: 1px solid #29445d;
+    border-radius: 12px;
+
+    color: #fff;
+
+    outline: none;
+
+    font-size: 15px;
+}
+
+.campo-atividade input:focus {
+    border-color: #ff6600;
+}
+
+
+/* UPLOAD */
+
+.upload-atividade {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    min-height: 130px;
+
+    padding: 18px;
+
+    border: 2px dashed #34516c;
+    border-radius: 16px;
+
+    background: #001f33;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.upload-atividade:hover {
+    border-color: #ff6600;
+
+    background: rgba(255, 102, 0, .05);
+}
+
+.upload-atividade-icone {
+    font-size: 28px;
+
+    margin-bottom: 8px;
+}
+
+.upload-atividade strong {
+    color: #fff;
+
+    margin-bottom: 5px;
+}
+
+.upload-atividade small {
+    color: #829bb1;
+
+    font-weight: 400;
+}
+
+.atividade-arquivo-nome {
+    color: #a9bdd1;
+
+    font-size: 12px;
+
+    word-break: break-word;
+}
+
+
+/* PREVIEW */
+
+.atividade-preview-container {
+    margin: 20px 0;
+}
+
+.atividade-preview-container span {
+    display: block;
+
+    color: #a9bdd1;
+
+    font-size: 12px;
+
+    margin-bottom: 8px;
+}
+
+.atividade-preview-container img {
+    display: block;
+
+    width: 100%;
+    max-height: 320px;
+
+    object-fit: contain;
+
+    border-radius: 14px;
+
+    background: #001522;
+
+    border: 1px solid #29445d;
+}
+
+
+/* BOTÃO */
+
+.btn-enviar-atividade {
+    width: 100%;
+
+    border: 0;
+    border-radius: 14px;
+
+    padding: 15px 18px;
+
+    background: #ff6600;
+
+    color: #fff;
+
+    font-weight: 800;
+
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.btn-enviar-atividade:hover {
+    transform: translateY(-1px);
+}
+
+.btn-enviar-atividade:disabled {
+    opacity: .55;
+
+    cursor: not-allowed;
+
+    transform: none;
+}
+
+
+/* AVISO */
+
+.atividade-aviso {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 20px;
+
+    padding: 13px;
+
+    border-radius: 12px;
+
+    background: rgba(255,255,255,.04);
+}
+
+.atividade-aviso p {
+    margin: 0;
+
+    color: #829bb1;
+
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+
+/* MENSAGEM */
+
+.atividade-mensagem {
+    margin-bottom: 15px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    font-size: 13px;
+}
+
+.atividade-mensagem.sucesso {
+    background: rgba(46, 204, 113, .12);
+
+    color: #63e58e;
+
+    border: 1px solid rgba(46, 204, 113, .25);
+}
+
+.atividade-mensagem.erro {
+    background: rgba(255, 102, 0, .10);
+
+    color: #ff8b3d;
+
+    border: 1px solid rgba(255, 102, 0, .25);
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .modal-atividade {
+        padding: 10px;
+    }
+
+    .modal-atividade-card {
+        padding: 22px 18px;
+
+        border-radius: 20px;
+
+        max-height: 95vh;
+    }
+
+}

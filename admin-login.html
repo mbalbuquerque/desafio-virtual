@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Login Administrativo | Corra Por Você</title>
+
+    <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+>
+
+<link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@700;800;900&display=swap"
+    rel="stylesheet"
+>
+
+<link
+    rel="stylesheet"
+    href="assets/css/admin-login.css"
+>
+
+    
+</head>
+
+<body>
+
+    <main class="admin-login-page">
+
+        <section class="admin-login-card">
+
+            <span class="admin-login-label">
+                CORRA POR VOCÊ
+            </span>
+
+            <h1>
+                Administração
+            </h1>
+
+            <p class="admin-login-description">
+                Entre com suas credenciais para acessar
+                o painel administrativo.
+            </p>
+
+            <form id="adminLoginForm">
+
+                <div class="admin-field">
+
+                    <label for="adminEmail">
+                        E-mail
+                    </label>
+
+                    <input
+                        id="adminEmail"
+                        type="email"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+                <div class="admin-field">
+
+                    <label for="adminPassword">
+                        Senha
+                    </label>
+
+                    <input
+                        id="adminPassword"
+                        type="password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+                <button
+                    id="adminLoginButton"
+                    class="admin-login-button"
+                    type="submit"
+                >
+                    Entrar
+                </button>
+
+                <p id="adminLoginMessage"></p>
+
+            </form>
+
+            <a
+                href="./index.html"
+                class="admin-login-back"
+            >
+                ← Voltar para o site
+            </a>
+
+                </section>
+
+    </main>
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="./assets/js/admin-login.js"></script>
+
+</body>
+</html>

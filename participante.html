@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07192b"
+    >
+
+    <title>
+        Área do Participante | Corra Por Você
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="assets/css/participante.css"
+    >
+</head>
+
+<body class="participant-page">
+
+    <!-- =============================================
+         HEADER
+    ============================================== -->
+
+    <header class="participant-header">
+
+        <a
+            href="index.html"
+            class="participant-brand"
+        >
+            <img
+                src="assets/images/logopng.png"
+                alt="Corra Por Você"
+            >
+        </a>
+
+        <div class="participant-header-actions">
+
+    <button
+    id="btnRegistrarAtividade"
+    class="strava-connect-button"
+    type="button"
+>
+    <span
+        class="strava-dot"
+        aria-hidden="true"
+    ></span>
+
+    <span>
+        Registrar atividade
+    </span>
+</button>
+
+<button
+    id="logoutButton"
+    class="logout-button"
+    type="button"
+>
+    Sair
+</button>
+
+</div>
+
+    </header>
+
+
+    <main class="participant-main">
+
+        <!-- =========================================
+             BOAS-VINDAS
+        ========================================== -->
+
+        <section class="participant-welcome">
+
+            <div>
+
+                <span class="eyebrow">
+                    ÁREA DO PARTICIPANTE
+                </span>
+
+                <h1>
+                    Olá,
+                    <span id="participantName">
+                        Marcelo
+                    </span>!
+                </h1>
+
+                <p>
+                    Acompanhe seu desempenho no
+                    Corra Por Você.
+                </p>
+
+            </div>
+
+            <div class="challenge-status status-good">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <small>SITUAÇÃO</small>
+                    <strong id="challengeStatus">
+                        No ritmo da meta
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             CARDS PRINCIPAIS
+        ========================================== -->
+
+        <section class="participant-summary">
+
+            <article class="summary-card main-progress-card">
+
+                <div class="summary-card-header">
+
+                    <div>
+                        <span class="eyebrow">
+                            MEU DESAFIO
+                        </span>
+
+                        <h2 id="challengeGoal">
+                            200 KM
+                        </h2>
+                    </div>
+
+                    <span class="summary-icon">
+                        🏃
+                    </span>
+
+                </div>
+
+
+                <div class="participant-progress-number">
+
+                    <strong id="progressKm">
+                        142,8
+                    </strong>
+
+                    <span>
+                        / <span id="goalKm">200</span> KM
+                    </span>
+
+                </div>
+
+
+                <div class="participant-progress-bar">
+
+                    <div
+                        id="progressBar"
+                        class="participant-progress-value"
+                        style="width: 71.4%"
+                    ></div>
+
+                </div>
+
+
+                <div class="participant-progress-footer">
+
+                    <span>
+                        <strong id="progressPercentage">
+                            71,4%
+                        </strong>
+                        concluído
+                    </span>
+
+                    <span>
+                        Faltam
+                        <strong id="remainingKm">
+                            57,2 KM
+                        </strong>
+                    </span>
+
+                </div>
+
+            </article>
+
+
+            <article class="summary-card">
+
+                <span class="summary-label">
+                    TEMPO RESTANTE
+                </span>
+
+                <strong
+                    id="remainingDays"
+                    class="summary-value"
+                >
+                    38
+                </strong>
+
+                <span class="summary-unit">
+                    dias
+                </span>
+
+                <p>
+                    até o encerramento do desafio
+                </p>
+
+            </article>
+
+
+            <article class="summary-card">
+
+                <span class="summary-label">
+                    RANKING
+                </span>
+
+                <strong
+                    id="rankingPosition"
+                    class="summary-value"
+                >
+                    12º
+                </strong>
+
+                <span class="summary-unit">
+                    posição
+                </span>
+
+                <p>
+                    classificação geral
+                </p>
+
+            </article>
+
+        </section>
+
+
+        <!-- =========================================
+             RITMO DA META
+        ========================================== -->
+
+        <section class="participant-section">
+
+            <div class="section-heading">
+
+                <div>
+                    <span class="eyebrow">
+                        ANÁLISE
+                    </span>
+
+                    <h2>
+                        Seu ritmo para a meta
+                    </h2>
+                </div>
+
+            </div>
+
+
+            <div class="pace-grid">
+
+                <article class="pace-card">
+
+                    <small>
+                        SEU PROGRESSO
+                    </small>
+
+                    <strong id="actualProgress">
+                        71,4%
+                    </strong>
+
+                </article>
+
+
+                <article class="pace-card">
+
+                    <small>
+                        ESPERADO ATÉ HOJE
+                    </small>
+
+                    <strong id="expectedProgress">
+                        65%
+                    </strong>
+
+                </article>
+
+
+                <article class="pace-card">
+
+                    <small>
+                        NECESSÁRIO / SEMANA
+                    </small>
+
+                    <strong id="weeklyRequired">
+                        10,5 KM
+                    </strong>
+
+                </article>
+
+
+                <article class="pace-card">
+
+                    <small>
+                        MÉDIA ATUAL / SEMANA
+                    </small>
+
+                    <strong id="weeklyAverage">
+                        24,6 KM
+                    </strong>
+
+                </article>
+
+            </div>
+
+
+            <article class="performance-insight">
+
+                <span class="insight-icon">
+                    💡
+                </span>
+
+                <div>
+
+                    <span class="eyebrow">
+                        INSIGHT DO DESAFIO
+                    </span>
+
+                    <h3 id="performanceTitle">
+                        Você está no caminho certo!
+                    </h3>
+
+                    <p id="performanceText">
+                        Mantendo seu ritmo atual,
+                        você tem boas condições de
+                        alcançar sua meta antes do
+                        encerramento do desafio.
+                    </p>
+
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- =========================================
+             ATIVIDADES
+        ========================================== -->
+
+        <section class="participant-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        STRAVA
+                    </span>
+
+                    <h2>
+                        Minhas atividades
+                    </h2>
+
+                </div>
+
+                <span class="strava-badge">
+                    ● STRAVA
+                </span>
+
+            </div>
+
+
+            <div
+                id="activitiesList"
+                class="activities-list"
+            >
+
+                <article class="activity-card">
+
+                    <div class="activity-icon">
+                        🏃
+                    </div>
+
+                    <div class="activity-info">
+
+                        <strong>
+                            Corrida matinal
+                        </strong>
+
+                        <span>
+                            29/09/2026
+                        </span>
+
+                    </div>
+
+                    <div class="activity-stat">
+                        <strong>7,2 KM</strong>
+                        <span>42 min</span>
+                    </div>
+
+                    <span class="activity-valid">
+                        ✓ Validada
+                    </span>
+
+                </article>
+
+
+                <article class="activity-card">
+
+                    <div class="activity-icon">
+                        🏃
+                    </div>
+
+                    <div class="activity-info">
+
+                        <strong>
+                            Corrida
+                        </strong>
+
+                        <span>
+                            27/09/2026
+                        </span>
+
+                    </div>
+
+                    <div class="activity-stat">
+                        <strong>10,1 KM</strong>
+                        <span>1h02</span>
+                    </div>
+
+                    <span class="activity-valid">
+                        ✓ Validada
+                    </span>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             DICAS
+        ========================================== -->
+
+        <section class="participant-section">
+
+            <div class="section-heading">
+
+                <div>
+
+                    <span class="eyebrow">
+                        PARA VOCÊ
+                    </span>
+
+                    <h2>
+                        Insights da semana
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="tips-grid">
+
+                <article class="tip-card">
+
+                    <span class="tip-icon">
+                        🏃
+                    </span>
+
+                    <h3>
+                        Treino
+                    </h3>
+
+                    <p id="trainingTip">
+                        Mantenha consistência e
+                        intercale sessões mais
+                        exigentes com treinos leves
+                        e recuperação.
+                    </p>
+
+                </article>
+
+
+                <article class="tip-card">
+
+                    <span class="tip-icon">
+                        💧
+                    </span>
+
+                    <h3>
+                        Hidratação
+                    </h3>
+
+                    <p id="hydrationTip">
+                        Planeje sua hidratação antes,
+                        durante e após atividades mais
+                        longas, especialmente em dias
+                        quentes.
+                    </p>
+
+                </article>
+
+
+                <article class="tip-card">
+
+                    <span class="tip-icon">
+                        🍌
+                    </span>
+
+                    <h3>
+                        Alimentação
+                    </h3>
+
+                    <p id="nutritionTip">
+                        Organize sua alimentação e
+                        recuperação nos dias de maior
+                        volume de treino.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================
+             COMPARTILHAR
+        ========================================== -->
+
+        <section class="share-section">
+
+            <div>
+
+                <span class="eyebrow">
+                    COMPARTILHE SUA EVOLUÇÃO
+                </span>
+
+                <h2>
+                    Corra por você.
+                    Inspire outras pessoas.
+                </h2>
+
+                <p>
+                    Gere um card com seu progresso
+                    para compartilhar nas redes sociais.
+                </p>
+
+            </div>
+
+
+            <button
+                id="shareResultButton"
+                class="share-button"
+                type="button"
+            >
+                Compartilhar meu resultado
+                <span>↗</span>
+            </button>
+
+        </section>
+
+
+        <p class="health-notice">
+            As informações de treino, hidratação e alimentação
+            têm caráter educativo e não substituem orientação
+            profissional individualizada.
+        </p>
+
+    </main>
+
+
+    
+
+    <!-- =====================================================
+     MODAL - REGISTRAR ATIVIDADE
+===================================================== -->
+
+<div
+    id="modalAtividade"
+    class="modal-atividade"
+    aria-hidden="true"
+>
+
+    <div class="modal-atividade-overlay"></div>
+
+    <div
+        class="modal-atividade-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="tituloModalAtividade"
+    >
+
+        <button
+            id="btnFecharAtividade"
+            class="modal-atividade-fechar"
+            type="button"
+            aria-label="Fechar"
+        >
+            ×
+        </button>
+
+        <div class="modal-atividade-header">
+
+            <span class="modal-atividade-icone">
+                🏃
+            </span>
+
+            <div>
+
+                <small>
+                    CORRA POR VOCÊ
+                </small>
+
+                <h2 id="tituloModalAtividade">
+                    Registrar atividade
+                </h2>
+
+            </div>
+
+        </div>
+
+
+        <p class="modal-atividade-texto">
+            Envie o print da sua atividade para
+            validação da organização.
+        </p>
+
+
+        <form id="formAtividade">
+
+            <!-- DATA -->
+
+            <div class="campo-atividade">
+
+                <label for="atividadeData">
+                    Data da atividade
+                </label>
+
+                <input
+                    type="date"
+                    id="atividadeData"
+                    required
+                >
+
+            </div>
+
+
+            <!-- DISTÂNCIA -->
+
+            <div class="campo-atividade">
+
+                <label for="atividadeDistancia">
+                    Distância (km)
+                </label>
+
+                <input
+                    type="number"
+                    id="atividadeDistancia"
+                    min="0.01"
+                    step="0.01"
+                    placeholder="Ex.: 4,00"
+                    required
+                >
+
+            </div>
+
+
+            <!-- TEMPO -->
+
+            <div class="campo-atividade">
+
+                <label for="atividadeTempo">
+                    Tempo
+                </label>
+
+                <input
+                    type="text"
+                    id="atividadeTempo"
+                    placeholder="Ex.: 24min 54s"
+                >
+
+            </div>
+
+
+            <!-- COMPROVANTE -->
+
+            <div class="campo-atividade">
+
+                <label>
+                    Print da atividade
+                </label>
+
+                <label
+                    for="atividadeComprovante"
+                    class="upload-atividade"
+                >
+
+                    <span class="upload-atividade-icone">
+                        📷
+                    </span>
+
+                    <strong>
+                        Selecionar imagem
+                    </strong>
+
+                    <small>
+                        JPG, PNG ou WEBP — máximo 5 MB
+                    </small>
+
+                </label>
+
+                <input
+                    type="file"
+                    id="atividadeComprovante"
+                    accept="image/jpeg,image/png,image/webp"
+                    required
+                    hidden
+                >
+
+                <div
+                    id="atividadeArquivoNome"
+                    class="atividade-arquivo-nome"
+                ></div>
+
+            </div>
+
+
+            <!-- PREVIEW -->
+
+            <div
+                id="atividadePreviewContainer"
+                class="atividade-preview-container"
+                hidden
+            >
+
+                <span>
+                    Prévia do comprovante
+                </span>
+
+                <img
+                    id="atividadePreview"
+                    alt="Prévia do comprovante da atividade"
+                >
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div
+                id="atividadeMensagem"
+                class="atividade-mensagem"
+                hidden
+            ></div>
+
+
+            <!-- BOTÃO -->
+
+            <button
+                id="btnEnviarAtividade"
+                class="btn-enviar-atividade"
+                type="submit"
+            >
+                Enviar para validação
+            </button>
+
+        </form>
+
+
+        <div class="atividade-aviso">
+
+            <span>🛡️</span>
+
+            <p>
+                A distância somente será contabilizada
+                após a validação do comprovante pela
+                organização.
+            </p>
+
+           </div>
+
+</div>
+
+
+<!-- =====================================================
+     SCRIPTS
+===================================================== -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+<script
+    src="assets/js/supabase.js"
+></script>
+
+<script
+    src="assets/js/participante.js"
+></script>
+
+
+</body>
+
+</html>
