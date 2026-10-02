@@ -431,10 +431,27 @@ function getChallengeSituation(metrics) {
      * Não devemos avaliar ritmo ou consistência
      * enquanto não houver quilômetros aprovados.
      */
-    if (
-        !metrics.completed ||
-        metrics.completed <= 0
-    ) {
+   
+        if (
+    metrics.currentKm <= 0
+) {
+
+    return {
+
+        status:
+            "Aguardando primeira atividade",
+
+        title:
+            "Comece seu desafio! 🏃",
+
+        text:
+            "Você ainda não possui atividades aprovadas. " +
+            "Registre seu primeiro treino para começarmos " +
+            "a acompanhar seu ritmo e evolução."
+
+    };
+
+}
 
         return {
 
@@ -585,7 +602,7 @@ function getChallengeSituation(metrics) {
 
     };
 
-}
+
 
 
 /* =====================================================
