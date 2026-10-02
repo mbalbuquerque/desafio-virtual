@@ -1663,6 +1663,14 @@ async function enviarAtividade(
             resultado.atividade
         );
 
+        /*
+ * Atualiza a lista de atividades
+ * sem recarregar a página.
+ */
+await loadParticipantActivities(
+    participant
+);
+
 
     } catch (error) {
 
