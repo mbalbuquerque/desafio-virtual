@@ -120,127 +120,133 @@
 
         </section>
 
+<!-- =========================================
+     CARDS PRINCIPAIS
+========================================== -->
 
-        <!-- =========================================
-             CARDS PRINCIPAIS
-        ========================================== -->
+<section class="participant-summary">
 
-        <section class="participant-summary">
+    <!-- PROGRESSO DO DESAFIO -->
+    <article class="summary-card main-progress-card">
 
-            <article class="summary-card main-progress-card">
+        <div class="summary-card-header">
 
-                <div class="summary-card-header">
-
-                    <div>
-                        <span class="eyebrow">
-                            MEU DESAFIO
-                        </span>
-
-                        <h2 id="challengeGoal">
-                            200 KM
-                        </h2>
-                    </div>
-
-                    <span class="summary-icon">
-                        🏃
-                    </span>
-
-                </div>
-
-
-                <div class="participant-progress-number">
-
-                    <strong id="progressKm">
-                        142,8
-                    </strong>
-
-                    <span>
-                        / <span id="goalKm">200</span> KM
-                    </span>
-
-                </div>
-
-
-                <div class="participant-progress-bar">
-
-                    <div
-                        id="progressBar"
-                        class="participant-progress-value"
-                        style="width: 71.4%"
-                    ></div>
-
-                </div>
-
-
-                <div class="participant-progress-footer">
-
-                    <span>
-                        <strong id="progressPercentage">
-                            71,4%
-                        </strong>
-                        concluído
-                    </span>
-
-                    <span>
-                        Faltam
-                        <strong id="remainingKm">
-                            57,2 KM
-                        </strong>
-                    </span>
-
-                </div>
-
-            </article>
-
-
-            <article class="summary-card">
-
-                <span class="summary-label">
-                    TEMPO RESTANTE
+            <div>
+                <span class="eyebrow">
+                    MEU DESAFIO
                 </span>
 
-                <strong
-                    id="remainingDays"
-                    class="summary-value"
-                >
-                    38
+                <h2 id="challengeGoal">
+                    0 KM
+                </h2>
+            </div>
+
+            <span class="summary-icon">
+                🏃
+            </span>
+
+        </div>
+
+
+        <div class="participant-progress-number">
+
+            <strong id="progressKm">
+                0,0
+            </strong>
+
+            <span>
+                /
+                <span id="goalKm">
+                    0
+                </span>
+                KM
+            </span>
+
+        </div>
+
+
+        <div class="participant-progress-bar">
+
+            <div
+                id="progressBar"
+                class="participant-progress-value"
+                style="width: 0%"
+            ></div>
+
+        </div>
+
+
+        <div class="participant-progress-footer">
+
+            <span>
+                <strong id="progressPercentage">
+                    0,0%
                 </strong>
+                concluído
+            </span>
 
-                <span class="summary-unit">
-                    dias
-                </span>
+            <span>
+                Faltam
+                <strong id="remainingKm">
+                    0,0 KM
+                </strong>
+            </span>
 
-                <p>
-                    até o encerramento do desafio
-                </p>
+        </div>
 
-            </article>
+    </article>
 
 
-            <article class="summary-card">
+    <!-- TEMPO RESTANTE -->
+    <article class="summary-card">
 
-                <span class="summary-label">
-                    RANKING
-                </span>
+        <span class="summary-label">
+            TEMPO RESTANTE
+        </span>
 
-                <strong
-    id="rankingPosition"
-    class="summary-value"
->
-    —
-</strong>
+        <strong
+            id="remainingDays"
+            class="summary-value"
+        >
+            —
+        </strong>
 
-                <span class="summary-unit">
-                    posição
-                </span>
+        <span class="summary-unit">
+            dias
+        </span>
 
-                <p>
-                    classificação geral
-                </p>
+        <p>
+            até o encerramento do desafio
+        </p>
 
-            </article>
+    </article>
 
-        </section>
+
+    <!-- RANKING -->
+    <article class="summary-card">
+
+        <span class="summary-label">
+            RANKING
+        </span>
+
+        <strong
+            id="rankingPosition"
+            class="summary-value"
+        >
+            —
+        </strong>
+
+        <span class="summary-unit">
+            posição
+        </span>
+
+        <p>
+            classificação geral
+        </p>
+
+    </article>
+
+</section>
 
 
        <!-- =========================================
@@ -357,102 +363,39 @@
 
 
         <!-- =========================================
-             ATIVIDADES
-        ========================================== -->
+     ATIVIDADES
+========================================== -->
 
-        <section class="participant-section">
+<section class="participant-section">
 
-            <div class="section-heading">
+    <div class="section-heading">
 
-                <div>
+        <div>
 
-                    <span class="eyebrow">
-                        STRAVA
-                    </span>
+            <span class="eyebrow">
+                ATIVIDADES
+            </span>
 
-                    <h2>
-                        Minhas atividades
-                    </h2>
+            <h2>
+                Minhas atividades
+            </h2>
 
-                </div>
+        </div>
 
-                <span class="strava-badge">
-                    ● STRAVA
-                </span>
-
-            </div>
+    </div>
 
 
-            <div
-                id="activitiesList"
-                class="activities-list"
+    <div
+        id="activitiesList"
+        class="activities-list"
+    >
+        <!--
+            As atividades serão carregadas
+            dinamicamente pelo participante.js
+        -->
+    </div>
 
-                >
-</div>
-            >
-
-                <article class="activity-card">
-
-                    <div class="activity-icon">
-                        🏃
-                    </div>
-
-                    <div class="activity-info">
-
-                        <strong>
-                            Corrida matinal
-                        </strong>
-
-                        <span>
-                            29/09/2026
-                        </span>
-
-                    </div>
-
-                    <div class="activity-stat">
-                        <strong>7,2 KM</strong>
-                        <span>42 min</span>
-                    </div>
-
-                    <span class="activity-valid">
-                        ✓ Validada
-                    </span>
-
-                </article>
-
-
-                <article class="activity-card">
-
-                    <div class="activity-icon">
-                        🏃
-                    </div>
-
-                    <div class="activity-info">
-
-                        <strong>
-                            Corrida
-                        </strong>
-
-                        <span>
-                            27/09/2026
-                        </span>
-
-                    </div>
-
-                    <div class="activity-stat">
-                        <strong>10,1 KM</strong>
-                        <span>1h02</span>
-                    </div>
-
-                    <span class="activity-valid">
-                        ✓ Validada
-                    </span>
-
-                </article>
-
-            </div>
-
-        </section>
+</section>
 
 
         <!-- =========================================
