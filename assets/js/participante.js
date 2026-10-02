@@ -292,10 +292,20 @@ function getGoalKm(
         String(
             modalidade || ""
         )
+            .trim()
             .toUpperCase()
             .replace(",", ".");
 
 
+    /*
+     * Aceita:
+     *
+     * 100km
+     * 100 KM
+     * 200km
+     * 300km
+     * 400km
+     */
     const match =
         text.match(
             /(\d+(?:\.\d+)?)\s*KM/
@@ -304,21 +314,37 @@ function getGoalKm(
 
     if (match) {
 
-        return Number(
-            match[1]
-        );
+        const goal =
+            Number(
+                match[1]
+            );
+
+
+        if (
+            Number.isFinite(goal) &&
+            goal > 0
+        ) {
+
+            return goal;
+
+        }
 
     }
 
 
     /*
-     * Fallback.
+     * Nenhuma modalidade válida encontrada.
+     * Não inventamos uma meta.
      */
+    console.warn(
+        "Modalidade não reconhecida:",
+        modalidade
+    );
 
-    return 200;
+
+    return 0;
 
 }
-
 
 /* =====================================================
    DIAS RESTANTES
