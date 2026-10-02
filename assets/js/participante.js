@@ -465,37 +465,31 @@ function calculateMetrics(
    SITUAÇÃO DO DESAFIO
 ===================================================== */
 
-function getChallengeSituation(metrics) {
-
-    /*
-     * Atleta ainda não iniciou
-     *
-     * Não devemos avaliar ritmo ou consistência
-     * enquanto não houver quilômetros aprovados.
-     */
-   
-        if (
-    metrics.currentKm <= 0
+function getChallengeSituation(
+    metrics
 ) {
 
-    return {
+    /*
+     * Ainda não iniciou
+     */
+    if (
+        metrics.currentKm <= 0
+    ) {
 
-        status:
-            "Aguardando primeira atividade",
+        return {
 
-        title:
-            "Comece seu desafio! 🏃",
+            status:
+                "Aguardando primeira atividade",
 
-        text:
-            "Você ainda não possui atividades aprovadas. " +
-            "Registre seu primeiro treino para começarmos " +
-            "a acompanhar seu ritmo e evolução."
+            title:
+                "Comece seu desafio! 🏃",
 
-    };
+            text:
+                "Você ainda não possui atividades aprovadas. " +
+                "Registre seu primeiro treino para começarmos " +
+                "a acompanhar seu ritmo e evolução."
 
-}
-
-        
+        };
 
     }
 
@@ -548,7 +542,7 @@ function getChallengeSituation(metrics) {
 
 
     /*
-     * Ritmo confortável
+     * Bom ritmo
      */
     if (
         metrics.requiredPerWeek <= 10
@@ -608,7 +602,7 @@ function getChallengeSituation(metrics) {
 
 
     /*
-     * Necessidade de aumentar consistência
+     * Ritmo abaixo do necessário
      */
     return {
 
@@ -631,8 +625,7 @@ function getChallengeSituation(metrics) {
 
     };
 
-
-
+}
 
 /* =====================================================
    ATUALIZAR INTERFACE
