@@ -68,6 +68,16 @@ const actualProgress =
     document.getElementById(
         "actualProgress"
     );
+    const expectedProgress =
+    document.getElementById(
+        "expectedProgress"
+    );
+
+
+const weeklyAverage =
+    document.getElementById(
+        "weeklyAverage"
+    );
 
 
 const progressBar =
@@ -453,20 +463,7 @@ function getChallengeSituation(metrics) {
 
 }
 
-        return {
-
-            status:
-                "Aguardando primeira atividade",
-
-            title:
-                "Comece seu desafio! 🏃",
-
-            text:
-                "Você ainda não possui atividades aprovadas. " +
-                "Registre seu primeiro treino para começarmos " +
-                "a acompanhar seu ritmo e evolução."
-
-        };
+        
 
     }
 
