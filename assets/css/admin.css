@@ -2038,3 +2038,871 @@ img {
     }
 
 }
+
+/* =========================================================
+   ADMIN - MÓDULO ATLETAS
+========================================================= */
+
+
+/* =========================================================
+   CABEÇALHO DA PÁGINA
+========================================================= */
+
+.admin-page-description {
+    margin-top: 8px;
+    color: #7fa6c5;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CARDS DE INDICADORES
+========================================================= */
+
+.athlete-stats {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+
+.athlete-stat-card {
+    position: relative;
+
+    min-height: 150px;
+
+    padding: 26px;
+
+    background: #071e2f;
+
+    border: 1px solid rgba(117, 167, 204, 0.18);
+    border-radius: 18px;
+
+    overflow: hidden;
+}
+
+
+.athlete-stat-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 95px;
+    height: 95px;
+
+    top: -30px;
+    right: -25px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 111, 0, 0.07);
+}
+
+
+.athlete-stat-card span {
+    display: block;
+
+    margin-bottom: 12px;
+
+    color: #80acd0;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.athlete-stat-card strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #ffffff;
+
+    font-size: 38px;
+    font-weight: 900;
+    line-height: 1;
+}
+
+
+.athlete-stat-card small {
+    color: #5f98c2;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   PAINEL PRINCIPAL
+========================================================= */
+
+.athletes-panel {
+    padding: 26px;
+
+    background: #071e2f;
+
+    border: 1px solid rgba(117, 167, 204, 0.18);
+    border-radius: 18px;
+}
+
+
+.athletes-panel-header {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+
+.athletes-panel-header h2 {
+    margin: 4px 0 0;
+
+    color: #ffffff;
+
+    font-size: 26px;
+    font-weight: 900;
+}
+
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+.athletes-filters {
+    display: grid;
+
+    grid-template-columns:
+        minmax(260px, 1fr)
+        220px
+        220px;
+
+    gap: 12px;
+
+    margin-bottom: 22px;
+}
+
+
+.athlete-search input,
+.athletes-filters select {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 15px;
+
+    color: #ffffff;
+
+    background: #031522;
+
+    border: 1px solid rgba(117, 167, 204, 0.2);
+    border-radius: 10px;
+
+    font-size: 13px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.athlete-search input::placeholder {
+    color: #61829c;
+}
+
+
+.athlete-search input:focus,
+.athletes-filters select:focus {
+    border-color: #ff6b00;
+
+    box-shadow:
+        0 0 0 3px rgba(255, 107, 0, 0.1);
+}
+
+
+.athletes-filters select {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   TABELA
+========================================================= */
+
+.athletes-table-wrapper {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border: 1px solid rgba(117, 167, 204, 0.12);
+    border-radius: 12px;
+}
+
+
+.athletes-table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 900px;
+}
+
+
+.athletes-table thead {
+    background: #031522;
+}
+
+
+.athletes-table th {
+    padding: 15px 16px;
+
+    color: #73a6cc;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+
+    text-align: left;
+
+    border-bottom:
+        1px solid rgba(117, 167, 204, 0.15);
+}
+
+
+.athletes-table td {
+    padding: 16px;
+
+    color: #dceaf4;
+
+    font-size: 13px;
+
+    border-bottom:
+        1px solid rgba(117, 167, 204, 0.08);
+
+    vertical-align: middle;
+}
+
+
+.athletes-table tbody tr {
+    transition:
+        background 0.2s ease;
+}
+
+
+.athletes-table tbody tr:hover {
+    background:
+        rgba(255, 255, 255, 0.025);
+}
+
+
+.athletes-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   DADOS DO ATLETA
+========================================================= */
+
+.athlete-name {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.athlete-name strong {
+    color: #ffffff;
+
+    font-size: 13px;
+}
+
+
+.athlete-name small {
+    color: #6e9abd;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   PROGRESSO NA TABELA
+========================================================= */
+
+.athlete-table-progress {
+    min-width: 145px;
+}
+
+
+.athlete-table-progress-info {
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 10px;
+
+    margin-bottom: 7px;
+
+    font-size: 11px;
+}
+
+
+.athlete-table-progress-info span {
+    color: #d8e6f0;
+}
+
+
+.athlete-table-progress-info strong {
+    color: #ff7200;
+}
+
+
+.athlete-table-progress-track {
+    height: 6px;
+
+    background: #0d334c;
+
+    border-radius: 999px;
+
+    overflow: hidden;
+}
+
+
+.athlete-table-progress-fill {
+    width: 0;
+    height: 100%;
+
+    background: #ff7200;
+
+    border-radius: inherit;
+
+    transition: width 0.4s ease;
+}
+
+
+/* =========================================================
+   STATUS
+========================================================= */
+
+.athlete-status {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 6px 10px;
+
+    border-radius: 999px;
+
+    font-size: 10px;
+    font-weight: 800;
+
+    white-space: nowrap;
+}
+
+
+.athlete-status.not-started {
+    color: #a6b8c6;
+
+    background: rgba(166, 184, 198, 0.1);
+}
+
+
+.athlete-status.active {
+    color: #ff8b32;
+
+    background: rgba(255, 114, 0, 0.12);
+}
+
+
+.athlete-status.completed {
+    color: #42d887;
+
+    background: rgba(66, 216, 135, 0.12);
+}
+
+
+/* =========================================================
+   BOTÃO VER ATLETA
+========================================================= */
+
+.athlete-view-button {
+    padding: 8px 14px;
+
+    color: #ffffff;
+
+    background: transparent;
+
+    border: 1px solid #ff7200;
+    border-radius: 8px;
+
+    font-size: 11px;
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.athlete-view-button:hover {
+    color: #071522;
+
+    background: #ff7200;
+}
+
+
+/* =========================================================
+   ESTADO VAZIO
+========================================================= */
+
+.athletes-empty {
+    padding: 38px !important;
+
+    color: #6e9abd !important;
+
+    text-align: center !important;
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.athlete-modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+}
+
+
+.athlete-modal.open {
+    display: flex;
+}
+
+
+.athlete-modal-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        rgba(0, 8, 15, 0.82);
+
+    backdrop-filter: blur(5px);
+}
+
+
+.athlete-modal-content {
+    position: relative;
+
+    z-index: 2;
+
+    width: min(820px, 100%);
+    max-height: 90vh;
+
+    padding: 30px;
+
+    overflow-y: auto;
+
+    background: #071e2f;
+
+    border:
+        1px solid rgba(255, 114, 0, 0.4);
+
+    border-radius: 18px;
+
+    box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45);
+}
+
+
+.athlete-modal-close {
+    position: absolute;
+
+    top: 18px;
+    right: 20px;
+
+    width: 36px;
+    height: 36px;
+
+    color: #ffffff;
+
+    background: #0b2b40;
+
+    border: none;
+    border-radius: 50%;
+
+    font-size: 24px;
+
+    cursor: pointer;
+}
+
+
+.athlete-modal-close:hover {
+    background: #ff7200;
+}
+
+
+/* =========================================================
+   PERFIL
+========================================================= */
+
+.athlete-profile-header {
+    padding-right: 50px;
+    margin-bottom: 25px;
+}
+
+
+.athlete-profile-header h2 {
+    margin: 5px 0;
+
+    color: #ffffff;
+
+    font-size: 30px;
+    font-weight: 900;
+}
+
+
+.athlete-profile-header p {
+    margin: 0;
+
+    color: #75a4c6;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   MÉTRICAS DO PERFIL
+========================================================= */
+
+.athlete-profile-stats {
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 24px;
+}
+
+
+.athlete-profile-stats > div {
+    padding: 18px;
+
+    background: #031522;
+
+    border:
+        1px solid rgba(117, 167, 204, 0.12);
+
+    border-radius: 12px;
+}
+
+
+.athlete-profile-stats span,
+.athlete-performance-grid span {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #6d9abb;
+
+    font-size: 9px;
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+}
+
+
+.athlete-profile-stats strong {
+    color: #ffffff;
+
+    font-size: 21px;
+}
+
+
+/* =========================================================
+   PROGRESSO NO MODAL
+========================================================= */
+
+.athlete-profile-progress {
+    padding: 20px;
+
+    margin-bottom: 24px;
+
+    background:
+        rgba(3, 21, 34, 0.7);
+
+    border-radius: 12px;
+}
+
+
+.athlete-progress-info {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 10px;
+}
+
+
+.athlete-progress-info span {
+    color: #7ca6c5;
+
+    font-size: 12px;
+}
+
+
+.athlete-progress-info strong {
+    color: #ff7200;
+
+    font-size: 13px;
+}
+
+
+.athlete-progress-track {
+    height: 10px;
+
+    overflow: hidden;
+
+    background: #0d334c;
+
+    border-radius: 999px;
+}
+
+
+.athlete-progress-fill {
+    width: 0;
+    height: 100%;
+
+    background: #ff7200;
+
+    border-radius: inherit;
+
+    transition: width 0.5s ease;
+}
+
+
+/* =========================================================
+   INDICADORES DE DESEMPENHO
+========================================================= */
+
+.athlete-performance-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-bottom: 28px;
+}
+
+
+.athlete-performance-grid > div {
+    padding: 17px;
+
+    background: #031522;
+
+    border-radius: 12px;
+
+    border:
+        1px solid rgba(117, 167, 204, 0.12);
+}
+
+
+.athlete-performance-grid strong {
+    color: #ffffff;
+
+    font-size: 16px;
+}
+
+
+/* =========================================================
+   HISTÓRICO
+========================================================= */
+
+.athlete-history {
+    padding-top: 24px;
+
+    border-top:
+        1px solid rgba(117, 167, 204, 0.12);
+}
+
+
+.athlete-history-title {
+    margin-bottom: 16px;
+}
+
+
+.athlete-history-title h3 {
+    margin: 5px 0 0;
+
+    color: #ffffff;
+
+    font-size: 20px;
+}
+
+
+.athlete-history-item {
+    display: grid;
+
+    grid-template-columns:
+        120px
+        1fr
+        1fr
+        auto;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 14px 15px;
+
+    margin-bottom: 8px;
+
+    background: #031522;
+
+    border-radius: 10px;
+}
+
+
+.athlete-history-item span {
+    color: #80a6c2;
+
+    font-size: 11px;
+}
+
+
+.athlete-history-item strong {
+    color: #ffffff;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .athlete-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .athletes-filters {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .athlete-search {
+        grid-column:
+            1 / -1;
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .athlete-stats {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .athletes-filters {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .athlete-search {
+        grid-column: auto;
+    }
+
+
+    .athlete-profile-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .athlete-performance-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .athlete-history-item {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+
+    .athlete-modal-content {
+        padding: 24px 18px;
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .athlete-profile-stats {
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .athletes-panel {
+        padding: 18px;
+    }
+
+
+    .athlete-stat-card {
+        min-height: auto;
+    }
+
+}
+
+.admin-menu-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    border: none;
+    text-decoration: none;
+
+    cursor: pointer;
+    font: inherit;
+}

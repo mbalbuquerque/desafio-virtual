@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+    <title>Atletas | Corra Por Você</title>
+
+    <!-- CSS principal do administrativo -->
+    <link
+        rel="stylesheet"
+        href="assets/css/admin.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <!-- =====================================================
+             MENU LATERAL
+        ====================================================== -->
+
+        <aside class="admin-sidebar">
+
+            <div class="admin-brand">
+
+                <div class="admin-brand-logo">
+                    ⚡
+                </div>
+
+                <div>
+                    <strong>
+                        CORRA POR VOCÊ
+                    </strong>
+
+                    <small>
+                        Administração
+                    </small>
+                </div>
+
+            </div>
+
+
+            <nav class="admin-menu">
+
+                <a
+                    href="admin.html"
+                    class="admin-menu-item"
+                >
+                    <span>▦</span>
+                    Dashboard
+                </a>
+
+
+                <a
+                    href="admin-atletas.html"
+                    class="admin-menu-item active"
+                >
+                    <span>👥</span>
+                    Atletas
+                </a>
+
+
+                <a
+                    href="admin.html#atividades"
+                    class="admin-menu-item"
+                >
+                    <span>🏃</span>
+                    Atividades
+                </a>
+
+            </nav>
+
+
+            <div class="admin-sidebar-footer">
+
+                <a
+                    href="index.html"
+                    class="admin-back-link"
+                >
+                    ← Voltar ao site
+                </a>
+
+
+                <button
+                    id="logoutButton"
+                    type="button"
+                    class="admin-logout-button"
+                >
+                    Sair
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =====================================================
+             CONTEÚDO
+        ====================================================== -->
+
+        <main class="admin-main">
+
+            <!-- CABEÇALHO -->
+
+            <header class="admin-page-header">
+
+                <div>
+
+                    <span class="admin-eyebrow">
+                        PAINEL ADMINISTRATIVO
+                    </span>
+
+                    <h1>
+                        ATLETAS
+                    </h1>
+
+                    <p class="admin-page-description">
+                        Acompanhe os participantes e a evolução
+                        no desafio.
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="refreshAthletesButton"
+                    type="button"
+                    class="admin-refresh-button"
+                >
+                    ↻ Atualizar
+                </button>
+
+            </header>
+
+
+            <!-- =================================================
+                 INDICADORES
+            ================================================== -->
+
+            <section class="athlete-stats">
+
+                <article class="athlete-stat-card">
+
+                    <span>
+                        ATLETAS INSCRITOS
+                    </span>
+
+                    <strong id="totalAthletes">
+                        0
+                    </strong>
+
+                    <small>
+                        participantes
+                    </small>
+
+                </article>
+
+
+                <article class="athlete-stat-card">
+
+                    <span>
+                        KM ACUMULADOS
+                    </span>
+
+                    <strong id="totalKilometers">
+                        0
+                    </strong>
+
+                    <small>
+                        quilômetros aprovados
+                    </small>
+
+                </article>
+
+
+                <article class="athlete-stat-card">
+
+                    <span>
+                        EM ANDAMENTO
+                    </span>
+
+                    <strong id="activeAthletes">
+                        0
+                    </strong>
+
+                    <small>
+                        atletas ativos
+                    </small>
+
+                </article>
+
+
+                <article class="athlete-stat-card">
+
+                    <span>
+                        META CONCLUÍDA
+                    </span>
+
+                    <strong id="completedAthletes">
+                        0
+                    </strong>
+
+                    <small>
+                        participantes
+                    </small>
+
+                </article>
+
+            </section>
+
+
+            <!-- =================================================
+                 LISTAGEM
+            ================================================== -->
+
+            <section class="athletes-panel">
+
+                <div class="athletes-panel-header">
+
+                    <div>
+
+                        <span class="admin-eyebrow">
+                            ACOMPANHAMENTO
+                        </span>
+
+                        <h2>
+                            PARTICIPANTES
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FILTROS -->
+
+                <div class="athletes-filters">
+
+                    <div class="athlete-search">
+
+                        <input
+                            id="athleteSearch"
+                            type="search"
+                            placeholder="Buscar por nome ou e-mail..."
+                            autocomplete="off"
+                        >
+
+                    </div>
+
+
+                    <select id="modalityFilter">
+
+                        <option value="">
+                            Todas as modalidades
+                        </option>
+
+                        <option value="100">
+                            100 KM
+                        </option>
+
+                        <option value="200">
+                            200 KM
+                        </option>
+
+                        <option value="300">
+                            300 KM
+                        </option>
+
+                        <option value="400">
+                            400 KM
+                        </option>
+
+                    </select>
+
+
+                    <select id="statusFilter">
+
+                        <option value="">
+                            Todas as situações
+                        </option>
+
+                        <option value="not-started">
+                            Não iniciou
+                        </option>
+
+                        <option value="active">
+                            Em andamento
+                        </option>
+
+                        <option value="completed">
+                            Meta concluída
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- =================================================
+                     TABELA
+                ================================================== -->
+
+                <div class="athletes-table-wrapper">
+
+                    <table class="athletes-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    ATLETA
+                                </th>
+
+                                <th>
+                                    META
+                                </th>
+
+                                <th>
+                                    REALIZADO
+                                </th>
+
+                                <th>
+                                    PROGRESSO
+                                </th>
+
+                                <th>
+                                    ATIVIDADES
+                                </th>
+
+                                <th>
+                                    SITUAÇÃO
+                                </th>
+
+                                <th>
+                                    AÇÃO
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="athletesTableBody">
+
+                            <tr>
+
+                                <td
+                                    colspan="7"
+                                    class="athletes-empty"
+                                >
+                                    Carregando atletas...
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =====================================================
+         MODAL DO ATLETA
+    ====================================================== -->
+
+    <div
+        id="athleteModal"
+        class="athlete-modal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="athlete-modal-overlay"
+            data-close-athlete-modal
+        ></div>
+
+
+        <div
+            class="athlete-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="athleteModalName"
+        >
+
+            <button
+                type="button"
+                class="athlete-modal-close"
+                data-close-athlete-modal
+                aria-label="Fechar"
+            >
+                ×
+            </button>
+
+
+            <!-- PERFIL -->
+
+            <div class="athlete-profile-header">
+
+                <span class="admin-eyebrow">
+                    PERFIL DO ATLETA
+                </span>
+
+                <h2 id="athleteModalName">
+                    Atleta
+                </h2>
+
+                <p id="athleteModalTeam">
+                    —
+                </p>
+
+            </div>
+
+
+            <!-- MÉTRICAS -->
+
+            <div class="athlete-profile-stats">
+
+                <div>
+
+                    <span>
+                        META
+                    </span>
+
+                    <strong id="modalGoal">
+                        0 KM
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        REALIZADO
+                    </span>
+
+                    <strong id="modalCompleted">
+                        0 KM
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        RESTANTE
+                    </span>
+
+                    <strong id="modalRemaining">
+                        0 KM
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        ATIVIDADES
+                    </span>
+
+                    <strong id="modalActivities">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- PROGRESSO -->
+
+            <div class="athlete-profile-progress">
+
+                <div class="athlete-progress-info">
+
+                    <span>
+                        Progresso
+                    </span>
+
+                    <strong id="modalProgressText">
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="athlete-progress-track">
+
+                    <div
+                        id="modalProgressBar"
+                        class="athlete-progress-fill"
+                    ></div>
+
+                </div>
+
+            </div>
+
+
+            <!-- INDICADORES -->
+
+            <div class="athlete-performance-grid">
+
+                <div>
+
+                    <span>
+                        MÉDIA / ATIVIDADE
+                    </span>
+
+                    <strong id="modalAverage">
+                        0 KM
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        MAIOR ATIVIDADE
+                    </span>
+
+                    <strong id="modalLongest">
+                        0 KM
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        ÚLTIMA ATIVIDADE
+                    </span>
+
+                    <strong id="modalLastActivity">
+                        —
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- HISTÓRICO -->
+
+            <div class="athlete-history">
+
+                <div class="athlete-history-title">
+
+                    <span class="admin-eyebrow">
+                        HISTÓRICO
+                    </span>
+
+                    <h3>
+                        ATIVIDADES APROVADAS
+                    </h3>
+
+                </div>
+
+
+                <div id="athleteHistory">
+
+                    <p class="athletes-empty">
+                        Nenhuma atividade disponível.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SUPABASE
+    ====================================================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <script src="assets/js/supabase.js"></script>
+
+    <script src="assets/js/admin-atletas.js"></script>
+
+</body>
+
+</html>
