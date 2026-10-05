@@ -1,0 +1,454 @@
+
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+Relatório QA - Desafio Virtual
+</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f4f6f8;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #1f2937;
+}
+
+.container {
+    width: 95%;
+    max-width: 1400px;
+    margin: 40px auto;
+}
+
+header {
+    background: #111827;
+    color: white;
+    padding: 35px;
+    border-radius: 14px;
+    margin-bottom: 25px;
+}
+
+header h1 {
+    margin: 0 0 10px;
+}
+
+header p {
+    margin: 6px 0;
+    color: #d1d5db;
+}
+
+.modo {
+    display: inline-block;
+    margin-top: 15px;
+    background: #f97316;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+.metricas {
+    display: grid;
+    grid-template-columns:
+        repeat(auto-fit, minmax(170px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.08);
+}
+
+.card small {
+    color: #6b7280;
+    font-weight: bold;
+}
+
+.card strong {
+    display: block;
+    margin-top: 10px;
+    font-size: 28px;
+}
+
+.decisao {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    margin-bottom: 25px;
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.08);
+}
+
+.decisao h2 {
+    margin-top: 0;
+}
+
+.liberado {
+    border-left: 7px solid #16a34a;
+}
+
+.ressalvas {
+    border-left: 7px solid #eab308;
+}
+
+.nao-liberar {
+    border-left: 7px solid #dc2626;
+}
+
+.liberado strong {
+    color: #15803d;
+}
+
+.ressalvas strong {
+    color: #a16207;
+}
+
+.nao-liberar strong {
+    color: #dc2626;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow:
+        0 2px 8px rgba(0,0,0,.08);
+}
+
+th {
+    background: #111827;
+    color: white;
+    text-align: left;
+    padding: 14px 10px;
+}
+
+td {
+    padding: 12px 10px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+tr:hover {
+    background: #f9fafb;
+}
+
+.pass {
+    color: #15803d;
+    font-weight: bold;
+}
+
+.fail {
+    color: #dc2626;
+    font-weight: bold;
+}
+
+.linha-falha {
+    background: #fef2f2;
+}
+
+footer {
+    margin-top: 25px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+
+    <h1>
+        Relatório de Garantia da Qualidade
+    </h1>
+
+    <p>
+        Sistema: Desafio Virtual - Corra por Você
+    </p>
+
+    <p>
+        Execução: 05/10/2026 19:27:15
+    </p>
+
+    <span class="modo">
+        VERSÃO COM BUG PROPOSITAL
+    </span>
+
+</header>
+
+
+<section class="metricas">
+
+    <div class="card">
+        <small>TESTES EXECUTADOS</small>
+        <strong>
+            10
+        </strong>
+    </div>
+
+    <div class="card">
+        <small>TESTES APROVADOS</small>
+        <strong>
+            9
+        </strong>
+    </div>
+
+    <div class="card">
+        <small>TESTES COM FALHA</small>
+        <strong>
+            1
+        </strong>
+    </div>
+
+    <div class="card">
+        <small>TAXA DE APROVAÇÃO</small>
+        <strong>
+            90.0%
+        </strong>
+    </div>
+
+    <div class="card">
+        <small>FALHAS CRÍTICAS</small>
+        <strong>
+            1
+        </strong>
+    </div>
+
+</section>
+
+
+<section class="decisao nao-liberar">
+
+    <h2>
+        Decisão final de QA
+    </h2>
+
+    <strong>
+        NÃO LIBERAR
+    </strong>
+
+</section>
+
+
+<table>
+
+<thead>
+
+<tr>
+    <th>ID</th>
+    <th>Requisito</th>
+    <th>Descrição</th>
+    <th>Esperado</th>
+    <th>Obtido</th>
+    <th>Status</th>
+    <th>Severidade</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+
+        <tr class="">
+            <td>QA-001</td>
+            <td>Inscrição</td>
+            <td>Validar e-mail corretamente preenchido</td>
+            <td>True</td>
+            <td>True</td>
+
+            <td class="pass">
+                PASS
+            </td>
+
+            <td>
+                ALTA
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>QA-002</td>
+            <td>Inscrição</td>
+            <td>Rejeitar e-mail inválido</td>
+            <td>False</td>
+            <td>False</td>
+
+            <td class="pass">
+                PASS
+            </td>
+
+            <td>
+                ALTA
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>QA-003</td>
+            <td>Inscrição</td>
+            <td>Detectar inscrição com e-mail duplicado</td>
+            <td>True</td>
+            <td>True</td>
+
+            <td class="pass">
+                PASS
+            </td>
+
+            <td>
+                CRÍTICA
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>QA-004</td>
+            <td>Área do participante</td>
+            <td>Permitir acesso de participante cadastrado</td>
+            <td>True</td>
+            <td>True</td>
+
+            <td class="pass">
+                PASS
+            </td>
+
+            <td>
+                CRÍTICA
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>QA-005</td>
+            <td>Área do participante</td>
+            <td>Bloquear e-mail não cadastrado</td>
+            <td>False</td>
+            <td>False</td>
+
+            <td class="pass">
+                PASS
+            </td>
+
+            <td>
+                CRÍTICA
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>QA-006</td>
+            <td>Atividades</td>
+            <td>Aceitar quilometragem válida</td>
+            <td>True</td>
+            <td>True</td>
+
+            <td class="pass">
+                PASS
+            </td>
+
+            <td>
+                ALTA
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>QA-007</td>
+            <td>Atividades</td>
+            <td>Bloquear quilometragem negativa</td>
+            <td>False</td>
+            <td>False</td>
+
+            <td class="pass">
+                PASS
+            </td>
+
+            <td>
+                CRÍTICA
+            </td>
+        </tr>
+        
+        <tr class="linha-falha">
+            <td>QA-008</td>
+            <td>Progresso</td>
+            <td>Calcular percentual de progresso</td>
+            <td>50.0</td>
+            <td>25.0</td>
+
+            <td class="fail">
+                FAIL
+            </td>
+
+            <td>
+                CRÍTICA
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>QA-009</td>
+            <td>Atividades</td>
+            <td>Validar atividade com evidência</td>
+            <td>True</td>
+            <td>True</td>
+
+            <td class="pass">
+                PASS
+            </td>
+
+            <td>
+                ALTA
+            </td>
+        </tr>
+        
+        <tr class="">
+            <td>QA-010</td>
+            <td>Ranking</td>
+            <td>Ordenar ranking pela maior quilometragem</td>
+            <td>Atleta B</td>
+            <td>Atleta B</td>
+
+            <td class="pass">
+                PASS
+            </td>
+
+            <td>
+                MÉDIA
+            </td>
+        </tr>
+        
+
+</tbody>
+
+</table>
+
+
+<footer>
+
+    Desafio Virtual - Corra por Você
+    <br>
+    Relatório gerado automaticamente
+    pela automação de testes QA.
+
+</footer>
+
+</div>
+
+</body>
+
+</html>
