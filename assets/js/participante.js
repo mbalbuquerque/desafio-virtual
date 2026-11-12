@@ -385,7 +385,82 @@ function getRemainingDays() {
    CALCULAR MÉTRICAS
 ===================================================== */
 
-calculateMetrics(participant)
+/* =====================================================
+   CALCULAR MÉTRICAS DO PARTICIPANTE
+===================================================== */
+
+const CHALLENGE_START_DATE =
+    new Date("2026-10-05T00:00:00");
+
+function calculateMetrics(participant) {
+
+    const currentKm = Math.max(
+        0,
+        Number(participant.km_percorrido || 0)
+    );
+
+    const targetKm = getGoalKm(
+        participant.modalidade
+    );
+
+    const percentage = targetKm > 0
+        ? (currentKm / targetKm) * 100
+        : 0;
+
+    const remaining = Math.max(
+        targetKm - currentKm,
+        0
+    );
+
+    const days = getRemainingDays();
+
+    const now = new Date();
+
+    const totalDays = Math.max(
+        1,
+        (
+            CHALLENGE_END_DATE.getTime() -
+            CHALLENGE_START_DATE.getTime()
+        ) / 86400000
+    );
+
+    const elapsedDays = Math.max(
+        0,
+        Math.min(
+            totalDays,
+            (
+                now.getTime() -
+                CHALLENGE_START_DATE.getTime()
+            ) / 86400000
+        )
+    );
+
+    const expectedProgress =
+        (elapsedDays / totalDays) * 100;
+
+    const elapsedWeeks = elapsedDays / 7;
+
+    const weeklyAverage = elapsedWeeks > 0
+        ? currentKm / elapsedWeeks
+        : 0;
+
+    const remainingWeeks = days / 7;
+
+    const requiredPerWeek = remainingWeeks > 0
+        ? remaining / remainingWeeks
+        : 0;
+
+    return {
+        currentKm,
+        targetKm,
+        percentage,
+        remaining,
+        days,
+        expectedProgress,
+        weeklyAverage,
+        requiredPerWeek
+    };
+}
 
 
 /* =====================================================
