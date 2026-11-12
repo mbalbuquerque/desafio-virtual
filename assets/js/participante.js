@@ -2258,161 +2258,183 @@ async function loadRankingPosition(participant) {
     }
 }
 
+
+async function recuperarIdInscricao(participant) {
+    if (participant.id) return participant;
+
+    if (!participant.email) {
+        console.error("E-mail do participante não encontrado.");
+        return participant;
+    }
+
+    try {
+        const { data, error } = await db
+            .from("inscricoes")
+            .select("id")
+            .eq("email", participant.email.trim())
+            .maybeSingle();
+
+        if (error) throw error;
+
+        if (!data?.id) {
+            console.warn("Inscrição não localizada.");
+            return participant;
+        }
+
+        const atualizado = {
+            ...participant,
+            id: data.id
+        };
+
+        sessionStorage.setItem(
+            PARTICIPANT_STORAGE_KEY,
+            JSON.stringify(atualizado)
+        );
+
+        return atualizado;
+
+    } catch (error) {
+        console.error("Erro ao recuperar inscrição:", error);
+        return participant;
+    }
+}
+
 /* =====================================================
    INICIALIZAÇÃO
 ===================================================== */
 
-function initializeParticipantPage() {
 
-    const participant =
-        getParticipant();
+async function initializeParticipantPage() {
 
+    let participant = getParticipant();
 
     /*
      * Participante não está autenticado.
      */
-
     if (!participant) {
-
-        window.location.replace(
-            "acesso.html"
-        );
-
-
+        window.location.replace("acesso.html");
         return;
-
     }
 
+    /*
+     * Recupera o ID da inscrição, caso não esteja
+     * disponível na sessão.
+     */
+    if (!participant.id) {
+        participant = await recuperarIdInscricao(participant);
+    }
 
     console.log(
         "Participante carregado:",
         participant.id
     );
 
-
     /*
      * Renderiza dashboard.
      */
+    renderParticipant(participant);
 
-    renderParticipant(
-        participant
-    );
+    /*
+     * Carrega atividades do participante.
+     */
+    try {
+        await loadParticipantActivities(participant);
+    } catch (error) {
+        console.error(
+            "Erro ao carregar atividades:",
+            error
+        );
+    }
 
-    loadParticipantActivities(
-    participant
-);
-
-    loadRankingPosition(participant);
-
+    /*
+     * Carrega posição no ranking.
+     */
+    try {
+        await loadRankingPosition(participant);
+    } catch (error) {
+        console.error(
+            "Erro ao carregar ranking:",
+            error
+        );
+    }
 
     /*
      * Logout.
      */
-
     if (logoutButton) {
-
         logoutButton.addEventListener(
             "click",
             logout
         );
-
     }
-
 
     /*
      * Compartilhar.
      */
-
     if (shareResultButton) {
-
         shareResultButton.addEventListener(
             "click",
             shareResult
         );
-
     }
-
 
     /*
      * Registrar atividade.
      */
-
     if (btnRegistrarAtividade) {
-
         btnRegistrarAtividade.addEventListener(
             "click",
             abrirModalAtividade
         );
-
     } else {
-
         console.error(
             "Botão btnRegistrarAtividade não encontrado."
         );
-
     }
-
 
     /*
      * Fechar modal.
      */
-
     if (btnFecharAtividade) {
-
         btnFecharAtividade.addEventListener(
             "click",
             fecharModalAtividade
         );
-
     }
-
 
     /*
      * Clique fora do modal.
      */
-
     modalAtividade
-        ?.querySelector(
-            ".modal-atividade-overlay"
-        )
+        ?.querySelector(".modal-atividade-overlay")
         ?.addEventListener(
             "click",
             fecharModalAtividade
         );
 
-
     /*
      * Seleção do comprovante.
      */
-
     if (atividadeComprovante) {
-
         atividadeComprovante.addEventListener(
             "change",
             atualizarPreviewComprovante
         );
-
     }
-
 
     /*
      * Envio da atividade.
      */
-
     if (formAtividade) {
-
         formAtividade.addEventListener(
             "submit",
             enviarAtividade
         );
-
     }
-
 
     console.log(
         "Área do participante inicializada."
     );
-
 }
 
 
