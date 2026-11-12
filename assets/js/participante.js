@@ -2191,17 +2191,16 @@ async function loadParticipantActivities(participant) {
    POSIÇÃO DO ATLETA NO RANKING
 ===================================================== */
 
-async function loadRankingPosition(participant) {
 
+async function loadRankingPosition(participant) {
     if (!rankingPosition) return;
 
     rankingPosition.textContent = "—";
 
     try {
-
         const { data, error } = await db
             .from("ranking_publico")
-            .select("id, nome, modalidade, km_percorrido");
+            .select("id, nome, equipe, modalidade, km_percorrido");
 
         if (error) throw error;
 
@@ -2214,46 +2213,51 @@ async function loadRankingPosition(participant) {
                 Number(a.km_percorrido)
             );
 
-        const indice = ranking.findIndex(item =>
-            String(item.id) === String(participant.id)
-        );
+        const normalizar = valor =>
+            String(valor || "").trim().toLowerCase();
 
-        if (indice === -1) {
-            console.warn(
-                "Participante não localizado no ranking."
+        let atleta = null;
+
+        // Prioridade: identificar pelo ID.
+        if (participant.id != null) {
+            atleta = ranking.find(item =>
+                String(item.id) === String(participant.id)
             );
+        }
+
+        // Alternativa: identificar por dados da inscrição.
+        if (!atleta) {
+            const candidatos = ranking.filter(item =>
+                normalizar(item.nome) === normalizar(participant.nome) &&
+                normalizar(item.modalidade) === normalizar(participant.modalidade) &&
+                normalizar(item.equipe) === normalizar(participant.equipe)
+            );
+
+            if (candidatos.length === 1) {
+                atleta = candidatos[0];
+            }
+        }
+
+        if (!atleta) {
+            console.warn("Não foi possível identificar o atleta no ranking.");
             return;
         }
 
-        const kmAtleta = Number(
-            ranking[indice].km_percorrido
-        );
+        const kmAtleta = Number(atleta.km_percorrido);
 
-        // Empates compartilham a mesma posição.
         const posicao = ranking.filter(item =>
             Number(item.km_percorrido) > kmAtleta
         ).length + 1;
 
-        rankingPosition.textContent =
-            posicao + "º";
+        rankingPosition.textContent = posicao + "º";
 
-        console.log(
-            "Posição no ranking:",
-            posicao
-        );
-
+        console.log("Posição no ranking:", posicao);
     } catch (error) {
-
-        console.error(
-            "Erro ao carregar ranking:",
-            error
-        );
-
+        console.error("Erro ao carregar ranking:", error);
         rankingPosition.textContent = "—";
-
     }
-
 }
+
 /* =====================================================
    INICIALIZAÇÃO
 ===================================================== */
