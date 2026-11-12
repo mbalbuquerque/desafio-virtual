@@ -385,80 +385,7 @@ function getRemainingDays() {
    CALCULAR MÉTRICAS
 ===================================================== */
 
-function calculateMetrics(
-    participant
-) {
-
-    const currentKm =
-        Math.max(
-            0,
-            Number(
-                participant.km_percorrido || 0
-            )
-        );
-
-
-    const targetKm =
-        getGoalKm(
-            participant.modalidade
-        );
-
-
-    const percentage =
-        targetKm > 0
-
-            ? (
-                currentKm /
-                targetKm
-            ) * 100
-
-            : 0;
-
-
-    const remaining =
-        Math.max(
-            targetKm - currentKm,
-            0
-        );
-
-
-    const days =
-        getRemainingDays();
-
-
-    const weeks =
-        days > 0
-
-            ? days / 7
-
-            : 0;
-
-
-    const requiredPerWeek =
-        weeks > 0
-
-            ? remaining / weeks
-
-            : 0;
-
-
-    return {
-
-        currentKm,
-
-        targetKm,
-
-        percentage,
-
-        remaining,
-
-        days,
-
-        requiredPerWeek
-
-    };
-
-}
+calculateMetrics(participant)
 
 
 /* =====================================================
@@ -769,6 +696,31 @@ function renderParticipant(
 
     }
 
+    /* =====================================================
+   PROGRESSO ESPERADO
+===================================================== */
+
+if (expectedProgress) {
+
+    expectedProgress.textContent =
+        formatNumber(
+            metrics.expectedProgress
+        ) + "%";
+
+}
+
+/* =====================================================
+   MÉDIA ATUAL POR SEMANA
+===================================================== */
+
+if (weeklyAverage) {
+
+    weeklyAverage.textContent =
+        formatNumber(
+            metrics.weeklyAverage
+        ) + " KM";
+
+}
 
     /* KM / SEMANA */
 
@@ -2015,37 +1967,32 @@ function renderActivities(activities) {
    CARREGAR ATIVIDADES DO PARTICIPANTE
 ===================================================== */
 
-async function loadParticipantActivities(
-    participant
-) {
+/* =====================================================
+   CARREGAR ATIVIDADES DO PARTICIPANTE
+===================================================== */
 
-    if (!activitiesList) {
-        return;
-    }
+async function loadParticipantActivities(participant) {
 
-
-    /*
-     * O participante precisa possuir ID da inscrição.
-     */
     if (!participant?.id) {
+        console.error("ID da inscrição não encontrado.");
 
-        console.error(
-            "ID da inscrição não encontrado."
-        );
-
-        renderActivities([]);
+        if (activitiesList) {
+            activitiesList.textContent =
+                "Não foi possível identificar sua inscrição.";
+        }
 
         return;
-
     }
-
 
     try {
 
-        const {
-            data,
-            error
-        } = await db
+        if (typeof db === "undefined") {
+            throw new Error(
+                "Cliente Supabase não inicializado."
+            );
+        }
+
+        const { data, error } = await db
             .from("atividades")
             .select(`
                 id,
@@ -2058,46 +2005,104 @@ async function loadParticipantActivities(
                 criado_em,
                 validado_em
             `)
-            .eq(
-                "inscricao_id",
-                participant.id
-            )
-            .order(
-                "data_atividade",
-                {
-                    ascending: false
-                }
-            );
-
+            .eq("inscricao_id", participant.id)
+            .order("data_atividade", {
+                ascending: false
+            });
 
         if (error) {
-
             throw error;
-
         }
 
+        const atividades = data || [];
+
+        /* Exibir atividades no histórico */
+
+        renderActivities(atividades);
+
+        /* Considerar somente atividades aprovadas */
+
+        const atividadesAprovadas =
+            atividades.filter(atividade => {
+
+                return String(
+                    atividade.status || ""
+                )
+                    .trim()
+                    .toUpperCase() === "APROVADA";
+
+            });
+
+        /* Somar quilômetros aprovados */
+
+        const totalKm =
+            atividadesAprovadas.reduce(
+                (total, atividade) => {
+
+                    const km = Number(
+                        String(
+                            atividade.distancia_km ?? 0
+                        ).replace(",", ".")
+                    );
+
+                    return total + (
+                        Number.isFinite(km) && km > 0
+                            ? km
+                            : 0
+                    );
+
+                },
+                0
+            );
+
+        /* Atualizar os dados do participante */
+
+        const participanteAtualizado = {
+            ...participant,
+            km_percorrido: totalKm
+        };
+
+        /* Atualizar armazenamento da sessão */
+
+        sessionStorage.setItem(
+            PARTICIPANT_STORAGE_KEY,
+            JSON.stringify(participanteAtualizado)
+        );
+
+        /* Atualizar dashboard */
+
+        renderParticipant(participanteAtualizado);
 
         console.log(
             "Atividades carregadas:",
-            data
+            atividades.length
         );
 
-
-        renderActivities(
-            data || []
+        console.log(
+            "Atividades aprovadas:",
+            atividadesAprovadas.length
         );
 
+        console.log(
+            "Total de KM aprovados:",
+            totalKm
+        );
 
     } catch (error) {
 
         console.error(
-            "Erro carregando atividades:",
+            "Erro ao carregar atividades:",
             error
         );
 
+        if (activitiesList) {
+            activitiesList.textContent =
+                "Não foi possível carregar as atividades. " +
+                "Tente atualizar a página.";
+        }
 
-        activitiesList.innerHTML =
-            "<p>Não foi possível carregar suas atividades.</p>";
+        /* Não sobrescrever métricas com zero
+           quando a consulta falhar. */
 
     }
 
