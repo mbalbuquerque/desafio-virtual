@@ -183,46 +183,38 @@ function clearParticipantStorage() {
    - credenciais Strava
 ===================================================== */
 
-function saveParticipant(
-    participant
-) {
+/* =====================================================
+   SALVAR DADOS DO PARTICIPANTE
+===================================================== */
+
+function saveParticipant(participant) {
 
     const safeParticipant = {
 
-        nome:
-            participant.nome || "",
+        id: participant.id ?? null,
 
-        email:
-            emailInput.value
-                .trim()
-                .toLowerCase(),
+        nome: participant.nome || "",
 
-        equipe:
-            participant.equipe || "",
+        email: normalizeEmail(
+            participant.email || emailInput.value
+        ),
 
-        modalidade:
-            participant.modalidade || "",
+        equipe: participant.equipe || "",
 
-        km_percorrido:
-            Number(
-                participant.km_percorrido || 0
-            )
+        modalidade: participant.modalidade || "",
+
+        km_percorrido: Number(
+            participant.km_percorrido || 0
+        )
 
     };
 
-
     sessionStorage.setItem(
-
         PARTICIPANT_STORAGE_KEY,
-
-        JSON.stringify(
-            safeParticipant
-        )
-
+        JSON.stringify(safeParticipant)
     );
 
 }
-
 /* =====================================================
    BUSCAR PARTICIPANTE
 ===================================================== */

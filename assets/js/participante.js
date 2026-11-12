@@ -103,6 +103,9 @@ const remainingDays =
         "remainingDays"
     );
 
+const rankingPosition =
+    document.getElementById("rankingPosition");
+
 
 const weeklyRequired =
     document.getElementById(
@@ -2183,6 +2186,94 @@ async function loadParticipantActivities(participant) {
 
 }
 
+
+/* =====================================================
+   POSIÇÃO NO RANKING
+===================================================== */
+
+async function loadRankingPosition(participant) {
+
+    if (!rankingPosition) {
+        return;
+    }
+
+    rankingPosition.textContent = "—";
+
+    if (!participant?.id) {
+        console.warn(
+            "Ranking: ID da inscrição não encontrado."
+        );
+        return;
+    }
+
+    try {
+
+        if (typeof db === "undefined") {
+            throw new Error(
+                "Supabase não inicializado."
+            );
+        }
+
+        const { data, error } = await db
+            .from("ranking_publico")
+            .select("*");
+
+        if (error) {
+            throw error;
+        }
+
+        console.log(
+            "Ranking carregado:",
+            data?.length || 0
+        );
+
+        /*
+         * Precisamos confirmar os nomes das colunas
+         * da view ranking_publico.
+         */
+
+        const atleta = (data || []).find(item =>
+            String(item.inscricao_id) ===
+            String(participant.id)
+        );
+
+        if (!atleta) {
+            console.warn(
+                "Atleta não encontrado no ranking."
+            );
+            return;
+        }
+
+        /*
+         * Usa a posição calculada pela view,
+         * quando disponível.
+         */
+
+        const posicao =
+            atleta.posicao ??
+            atleta.posicao_ranking ??
+            atleta.ranking_position;
+
+        if (
+            posicao !== null &&
+            posicao !== undefined
+        ) {
+            rankingPosition.textContent =
+                String(posicao) + "º";
+        }
+
+    } catch (error) {
+
+        console.error(
+            "Erro ao carregar ranking:",
+            error
+        );
+
+        rankingPosition.textContent = "—";
+
+    }
+
+}
 /* =====================================================
    INICIALIZAÇÃO
 ===================================================== */
@@ -2226,6 +2317,8 @@ function initializeParticipantPage() {
     loadParticipantActivities(
     participant
 );
+
+    loadRankingPosition(participant);
 
 
     /*
