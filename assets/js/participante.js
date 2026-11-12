@@ -2188,79 +2188,59 @@ async function loadParticipantActivities(participant) {
 
 
 /* =====================================================
-   POSIÇÃO NO RANKING
+   POSIÇÃO DO ATLETA NO RANKING
 ===================================================== */
 
 async function loadRankingPosition(participant) {
 
-    if (!rankingPosition) {
-        return;
-    }
+    if (!rankingPosition) return;
 
     rankingPosition.textContent = "—";
 
-    if (!participant?.id) {
-        console.warn(
-            "Ranking: ID da inscrição não encontrado."
-        );
-        return;
-    }
-
     try {
-
-        if (typeof db === "undefined") {
-            throw new Error(
-                "Supabase não inicializado."
-            );
-        }
 
         const { data, error } = await db
             .from("ranking_publico")
-            .select("*");
+            .select("id, nome, modalidade, km_percorrido");
 
-        if (error) {
-            throw error;
-        }
+        if (error) throw error;
 
-        console.log(
-            "Ranking carregado:",
-            data?.length || 0
+        const ranking = (data || [])
+            .filter(item =>
+                Number.isFinite(Number(item.km_percorrido))
+            )
+            .sort((a, b) =>
+                Number(b.km_percorrido) -
+                Number(a.km_percorrido)
+            );
+
+        const indice = ranking.findIndex(item =>
+            String(item.id) === String(participant.id)
         );
 
-        /*
-         * Precisamos confirmar os nomes das colunas
-         * da view ranking_publico.
-         */
-
-        const atleta = (data || []).find(item =>
-            String(item.inscricao_id) ===
-            String(participant.id)
-        );
-
-        if (!atleta) {
+        if (indice === -1) {
             console.warn(
-                "Atleta não encontrado no ranking."
+                "Participante não localizado no ranking."
             );
             return;
         }
 
-        /*
-         * Usa a posição calculada pela view,
-         * quando disponível.
-         */
+        const kmAtleta = Number(
+            ranking[indice].km_percorrido
+        );
 
-        const posicao =
-            atleta.posicao ??
-            atleta.posicao_ranking ??
-            atleta.ranking_position;
+        // Empates compartilham a mesma posição.
+        const posicao = ranking.filter(item =>
+            Number(item.km_percorrido) > kmAtleta
+        ).length + 1;
 
-        if (
-            posicao !== null &&
-            posicao !== undefined
-        ) {
-            rankingPosition.textContent =
-                String(posicao) + "º";
-        }
+        rankingPosition.textContent =
+            posicao + "º";
+
+        console.log(
+            "Posição no ranking:",
+            posicao
+        );
 
     } catch (error) {
 
