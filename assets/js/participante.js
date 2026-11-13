@@ -863,138 +863,274 @@ function logout() {
 
 }
 
+
 /* =====================================================
-   COMPARTILHAR
+   COMPARTILHAR RESULTADO — CARD PERSONALIZADO
 ===================================================== */
 
 async function shareResult() {
+    const participant = getParticipant();
+    const metrics = window.participantMetrics;
 
-    const participant =
-        getParticipant();
-
-
-    const metrics =
-        window.participantMetrics;
-
-
-    if (
-        !participant ||
-        !metrics
-    ) {
-
+    if (!participant || !metrics) {
+        alert("Não foi possível carregar seu resultado.");
         return;
-
     }
 
+    const nome = String(participant.nome || "Atleta").trim();
+    const equipe = String(participant.equipe || "Atleta independente");
+    const km = Number(metrics.currentKm || 0);
+    const meta = Number(metrics.targetKm || 0);
+    const percentual = meta > 0
+        ? Math.min(100, Math.max(0, (km / meta) * 100))
+        : 0;
 
-    const firstName =
-        String(
-            participant.nome || "Atleta"
-        )
-            .trim()
-            .split(/\s+/)[0];
+    const formatar = (valor, casas = 1) =>
+        Number(valor).toLocaleString("pt-BR", {
+            minimumFractionDigits: casas,
+            maximumFractionDigits: casas
+        });
 
+    const canvas = document.createElement("canvas");
+    canvas.width = 1080;
+    canvas.height = 1350;
 
-    const text =
+    const ctx = canvas.getContext("2d");
 
-        "🏃 " +
-        firstName +
-        " está no Desafio Corra Por Você!\n\n" +
+    // Fundo
+    const fundo = ctx.createLinearGradient(0, 0, 1080, 1350);
+    fundo.addColorStop(0, "#06182C");
+    fundo.addColorStop(1, "#0B2B49");
+    ctx.fillStyle = fundo;
+    ctx.fillRect(0, 0, 1080, 1350);
 
-        "📏 " +
-        formatNumber(
-            metrics.currentKm
-        ) +
-        " km percorridos\n" +
+    // Detalhes decorativos
+    ctx.fillStyle = "#FF7900";
+    ctx.fillRect(0, 0, 1080, 18);
+    ctx.fillRect(0, 1332, 1080, 18);
 
-        "🎯 Meta: " +
-        formatNumber(
-            metrics.targetKm,
-            0
-        ) +
-        " km\n" +
+    ctx.textAlign = "center";
 
-        "🔥 " +
-        formatNumber(
-            metrics.percentage
-        ) +
-        "% concluído\n\n" +
+    // Identidade do evento
+    ctx.fillStyle = "#FF7900";
+    ctx.font = "bold 34px Arial";
+    ctx.fillText("DESAFIO VIRTUAL 2026", 540, 150);
 
-        "#CorraPorVoce";
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "bold 76px Arial";
+    ctx.fillText("CORRA POR VOCÊ", 540, 260);
 
+    ctx.fillStyle = "#A9C0D6";
+    ctx.font = "30px Arial";
+    ctx.fillText("MINHA EVOLUÇÃO NO DESAFIO", 540, 325);
 
-    if (
-        navigator.share
-    ) {
+    // Nome do atleta (ajuste para nomes longos)
+    let tamanhoNome = 54;
+    do {
+        ctx.font = `bold ${tamanhoNome}px Arial`;
+        if (ctx.measureText(nome).width <= 940) break;
+        tamanhoNome -= 2;
+    } while (tamanhoNome > 28);
 
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillText(nome, 540, 465);
+
+    ctx.fillStyle = "#A9C0D6";
+    ctx.font = "30px Arial";
+    ctx.fillText(equipe.slice(0, 55), 540, 520);
+
+    // Quilometragem
+    ctx.fillStyle = "#FF7900";
+    ctx.font = "bold 150px Arial";
+    ctx.fillText(formatar(km), 540, 750);
+
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "bold 48px Arial";
+    ctx.fillText("KM PERCORRIDOS", 540, 820);
+
+    ctx.fillStyle = "#A9C0D6";
+    ctx.font = "34px Arial";
+    ctx.fillText(`META: ${formatar(meta, 0)} KM`, 540, 890);
+
+    // Barra de progresso
+    const barraX = 130;
+    const barraY = 970;
+    const barraLargura = 820;
+    const barraAltura = 30;
+
+    ctx.fillStyle = "#24425D";
+    ctx.fillRect(barraX, barraY, barraLargura, barraAltura);
+
+    ctx.fillStyle = "#FF7900";
+    ctx.fillRect(
+        barraX,
+        barraY,
+        barraLargura * percentual / 100,
+        barraAltura
+    );
+
+    ctx.fillStyle = "#FFFFFF";
+    ctx.font = "bold 46px Arial";
+    ctx.fillText(
+        `${formatar(percentual)}% CONCLUÍDO`,
+        540,
+        1090
+    );
+
+    ctx.fillStyle = "#A9C0D6";
+    ctx.font = "28px Arial";
+    ctx.fillText(
+        "Cada quilômetro é uma conquista!",
+        540,
+        1190
+    );
+
+    ctx.fillStyle = "#FF7900";
+    ctx.font = "bold 28px Arial";
+    ctx.fillText("#CorraPorVoce", 540, 1250);
+
+    // Gerar arquivo PNG
+    const blob = await new Promise(resolve =>
+        canvas.toBlob(resolve, "image/png")
+    );
+
+    if (!blob) {
+        alert("Não foi possível gerar o card.");
+        return;
+    }
+
+    const arquivo = new File(
+        [blob],
+        "corra-por-voce-resultado.png",
+        { type: "image/png" }
+    );
+
+    const url = URL.createObjectURL(blob);
+
+    // Criar modal de pré-visualização
+    document.getElementById("modalCompartilharResultado")?.remove();
+
+    const modal = document.createElement("div");
+    modal.id = "modalCompartilharResultado";
+
+    Object.assign(modal.style, {
+        position: "fixed",
+        inset: "0",
+        background: "rgba(0,0,0,0.88)",
+        zIndex: "99999",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        padding: "20px"
+    });
+
+    const painel = document.createElement("div");
+
+    Object.assign(painel.style, {
+        background: "#071B30",
+        border: "1px solid #29435B",
+        borderRadius: "18px",
+        padding: "20px",
+        width: "100%",
+        maxWidth: "430px",
+        maxHeight: "95vh",
+        overflowY: "auto",
+        textAlign: "center",
+        color: "#FFFFFF"
+    });
+
+    const titulo = document.createElement("h2");
+    titulo.textContent = "Compartilhe sua evolução";
+    titulo.style.margin = "0 0 15px";
+
+    const imagem = document.createElement("img");
+    imagem.src = url;
+    imagem.alt = "Card com o resultado do desafio";
+    imagem.style.width = "100%";
+    imagem.style.maxHeight = "55vh";
+    imagem.style.objectFit = "contain";
+    imagem.style.borderRadius = "10px";
+
+    const botoes = document.createElement("div");
+
+    Object.assign(botoes.style, {
+        display: "flex",
+        gap: "10px",
+        flexWrap: "wrap",
+        justifyContent: "center",
+        marginTop: "18px"
+    });
+
+    function criarBotao(texto, cor) {
+        const botao = document.createElement("button");
+        botao.type = "button";
+        botao.textContent = texto;
+
+        Object.assign(botao.style, {
+            background: cor,
+            color: "#FFFFFF",
+            border: "none",
+            borderRadius: "10px",
+            padding: "12px 16px",
+            fontWeight: "bold",
+            cursor: "pointer"
+        });
+
+        return botao;
+    }
+
+    const baixar = criarBotao("Baixar imagem", "#FF7900");
+    const compartilhar = criarBotao("Compartilhar", "#087F5B");
+    const fechar = criarBotao("Fechar", "#34495E");
+
+    baixar.addEventListener("click", () => {
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "corra-por-voce-resultado.png";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+    });
+
+    compartilhar.addEventListener("click", async () => {
         try {
-
-            await navigator.share({
-
-                title:
-                    "Corra Por Você",
-
-                text:
-                    text
-
-            });
-
-
-            return;
-
-
-        } catch (error) {
-
             if (
-                error.name !==
-                "AbortError"
+                navigator.share &&
+                navigator.canShare?.({ files: [arquivo] })
             ) {
-
-                console.error(
-                    "Erro ao compartilhar:",
-                    error
+                await navigator.share({
+                    title: "Corra Por Você",
+                    text: "Confira minha evolução no desafio! 🏃",
+                    files: [arquivo]
+                });
+            } else {
+                alert(
+                    "O compartilhamento direto da imagem não está disponível neste navegador. Baixe o card para compartilhar."
                 );
-
             }
-
-
-            return;
-
+        } catch (error) {
+            if (error.name !== "AbortError") {
+                console.error("Erro ao compartilhar:", error);
+            }
         }
+    });
 
+    function fecharModal() {
+        modal.remove();
+        URL.revokeObjectURL(url);
     }
 
+    fechar.addEventListener("click", fecharModal);
 
-    try {
+    modal.addEventListener("click", event => {
+        if (event.target === modal) fecharModal();
+    });
 
-        await navigator.clipboard
-            .writeText(
-                text
-            );
-
-
-        alert(
-            "Seu resultado foi copiado. " +
-            "Agora você pode compartilhar!"
-        );
-
-
-    } catch (error) {
-
-        console.error(
-            "Erro ao copiar resultado:",
-            error
-        );
-
-
-        alert(
-            text
-        );
-
-    }
-
+    botoes.append(baixar, compartilhar, fechar);
+    painel.append(titulo, imagem, botoes);
+    modal.appendChild(painel);
+    document.body.appendChild(modal);
 }
-
 
 /* =====================================================
    MENSAGEM DA ATIVIDADE
