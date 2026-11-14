@@ -349,9 +349,11 @@ async function accessChallenge(
         ----------------------------------------- */
 
         const participant =
-            await findParticipant(
-                email
-            );
+            await findParticipant(email);
+
+            if (participant) {
+                participant.email = email;
+}
 
 
         /* -----------------------------------------

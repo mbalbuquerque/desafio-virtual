@@ -2395,25 +2395,43 @@ async function loadRankingPosition(participant) {
 }
 
 
-async function recuperarIdInscricao(participant) {
-    if (participant.id) return participant;
 
-    if (!participant.email) {
-        console.error("E-mail do participante não encontrado.");
-        return participant;
-    }
+async function recuperarIdInscricao(participant) {
+    if (!participant) return null;
 
     try {
+        // Obtém o usuário autenticado pelo Supabase
+        const { data: authData, error: authError } =
+            await db.auth.getUser();
+
+        if (authError) {
+            console.error("Erro de autenticação:", authError);
+            return participant;
+        }
+
+        const user = authData?.user;
+
+        if (!user) {
+            console.warn("Usuário não autenticado no Supabase.");
+            return participant;
+        }
+
+        // Busca a inscrição vinculada ao usuário autenticado
         const { data, error } = await db
             .from("inscricoes")
             .select("id")
-            .eq("email", participant.email.trim())
+            .eq("user_id", user.id)
             .maybeSingle();
 
-        if (error) throw error;
+        if (error) {
+            console.error("Erro ao consultar inscrição:", error);
+            return participant;
+        }
 
         if (!data?.id) {
-            console.warn("Inscrição não localizada.");
+            console.warn(
+                "Nenhuma inscrição vinculada ao usuário autenticado."
+            );
             return participant;
         }
 
@@ -2427,6 +2445,8 @@ async function recuperarIdInscricao(participant) {
             JSON.stringify(atualizado)
         );
 
+        console.log("Inscrição identificada:", atualizado.id);
+
         return atualizado;
 
     } catch (error) {
@@ -2434,6 +2454,7 @@ async function recuperarIdInscricao(participant) {
         return participant;
     }
 }
+
 
 /* =====================================================
    INICIALIZAÇÃO
