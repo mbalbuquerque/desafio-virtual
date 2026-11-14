@@ -2187,12 +2187,12 @@ function renderActivities(activities) {
 
 async function loadParticipantActivities(participant) {
 
-    if (!participant?.id) {
-        console.error("ID da inscrição não encontrado.");
+    if (!participant?.nome || !participant?.modalidade) {
+        console.warn("Dados do participante incompletos.");
 
         if (activitiesList) {
             activitiesList.textContent =
-                "Não foi possível identificar sua inscrição.";
+                "Não foi possível identificar o participante.";
         }
 
         return;
@@ -2200,26 +2200,27 @@ async function loadParticipantActivities(participant) {
 
     try {
 
-        if (typeof db === "undefined") {
+        if (typeof db === "undefined" || !db) {
             throw new Error(
                 "Cliente Supabase não inicializado."
             );
         }
 
+        if (activitiesList) {
+            activitiesList.textContent =
+                "Carregando atividades...";
+        }
+
         const { data, error } = await db
-            .from("atividades")
+            .from("atividades_publicas")
             .select(`
-                id,
-                inscricao_id,
                 data_atividade,
                 distancia_km,
                 tempo,
-                status,
-                observacao_admin,
-                criado_em,
-                validado_em
+                status
             `)
-            .eq("inscricao_id", participant.id)
+            .eq("nome", participant.nome)
+            .eq("modalidade", participant.modalidade)
             .order("data_atividade", {
                 ascending: false
             });
@@ -2230,77 +2231,27 @@ async function loadParticipantActivities(participant) {
 
         const atividades = data || [];
 
-        /* Exibir atividades no histórico */
-
-        renderActivities(atividades);
-
-        /* Considerar somente atividades aprovadas */
-
-        const atividadesAprovadas =
-            atividades.filter(atividade => {
-
-                return String(
-                    atividade.status || ""
-                )
-                    .trim()
-                    .toUpperCase() === "APROVADA";
-
-            });
-
-        /* Somar quilômetros aprovados */
-
-        const totalKm =
-            atividadesAprovadas.reduce(
-                (total, atividade) => {
-
-                    const km = Number(
-                        String(
-                            atividade.distancia_km ?? 0
-                        ).replace(",", ".")
-                    );
-
-                    return total + (
-                        Number.isFinite(km) && km > 0
-                            ? km
-                            : 0
-                    );
-
-                },
-                0
-            );
-
-        /* Atualizar os dados do participante */
-
-        const participanteAtualizado = {
-            ...participant,
-            km_percorrido: totalKm
-        };
-
-        /* Atualizar armazenamento da sessão */
-
-        sessionStorage.setItem(
-            PARTICIPANT_STORAGE_KEY,
-            JSON.stringify(participanteAtualizado)
-        );
-
-        /* Atualizar dashboard */
-
-        renderParticipant(participanteAtualizado);
-
         console.log(
             "Atividades carregadas:",
             atividades.length
         );
 
-        console.log(
-            "Atividades aprovadas:",
-            atividadesAprovadas.length
-        );
+        if (atividades.length === 0) {
 
-        console.log(
-            "Total de KM aprovados:",
-            totalKm
-        );
+            if (activitiesList) {
+                activitiesList.textContent =
+                    "Nenhuma atividade encontrada.";
+            }
+
+            return;
+        }
+
+        // Exibir histórico de atividades
+        renderActivities(atividades);
+
+        // Não recalcular a quilometragem.
+        // Não alterar os dados da sessão.
+        // Não modificar o dashboard ou ranking.
 
     } catch (error) {
 
@@ -2315,14 +2266,9 @@ async function loadParticipantActivities(participant) {
                 "Tente atualizar a página.";
         }
 
-        /* Não sobrescrever métricas com zero
-           quando a consulta falhar. */
-
     }
 
 }
-
-
 /* =====================================================
    POSIÇÃO DO ATLETA NO RANKING
 ===================================================== */
