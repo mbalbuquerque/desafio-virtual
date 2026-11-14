@@ -1,418 +1,348 @@
 # 🏃 Corra Por Você — Desafio Virtual
 
-Plataforma web para gerenciamento de um **desafio virtual de corrida e caminhada**, permitindo inscrição de participantes, acompanhamento de quilometragem, envio de comprovantes de atividades e validação administrativa.
+Plataforma web para gerenciamento de desafios virtuais de corrida, com inscrições, acompanhamento de desempenho, registro de atividades, ranking e administração do evento.
 
-O projeto foi desenvolvido com foco em simplicidade, experiência mobile e controle das atividades realizadas pelos participantes.
+O sistema permite que atletas acompanhem sua evolução durante o desafio, consultem suas atividades e comparem o desempenho real com a meta estabelecida.
 
----
+## 1. Sobre o projeto
 
-## 🎯 Objetivo
+O **Corra Por Você — Desafio Virtual** foi desenvolvido para oferecer uma experiência digital simples e acessível aos participantes de desafios esportivos.
 
-O **Corra Por Você** permite que cada participante escolha uma meta de distância e acompanhe sua evolução durante o período do desafio.
+A plataforma reúne funcionalidades de inscrição, acompanhamento individual, registro de atividades e gestão administrativa em uma interface responsiva.
 
-As atividades são registradas pelo participante através do envio de um comprovante, como um print de aplicativo de corrida ou caminhada, e posteriormente analisadas pela administração.
+O projeto utiliza HTML, CSS e JavaScript no frontend, Supabase como serviço de banco de dados e Netlify para hospedagem.
 
-Somente atividades aprovadas entram na quilometragem oficial do participante.
+## 2. Tecnologias utilizadas
 
----
+| Tecnologia | Aplicação |
+|---|---|
+| HTML5 | Estrutura das páginas |
+| CSS3 | Estilização e responsividade |
+| JavaScript | Interatividade e regras do frontend |
+| Supabase | Banco PostgreSQL e APIs |
+| Chart.js | Gráficos dinâmicos de desempenho |
+| Netlify | Hospedagem e publicação |
+| Git e GitHub | Versionamento do projeto |
 
-## ✨ Principais funcionalidades
+## 3. Funcionalidades
 
-### 📝 Inscrição
+### Landing page
 
-- Cadastro online de participantes
-- Nome
-- E-mail
-- WhatsApp
-- Equipe/assessoria
-- Escolha da modalidade
-- Validação dos campos
-- Bloqueio de inscrições duplicadas por e-mail
-- Contagem de participantes
+- Apresentação do desafio.
+- Informações sobre participação.
+- Formulário de inscrição.
+- Contador de inscritos.
+- Acesso à área do participante.
+- Ranking público.
 
----
+### Inscrição de atletas
 
-### 💳 Pagamento
+- Cadastro de nome, e-mail e modalidade.
+- Equipe opcional.
+- Validação de duplicidade por e-mail.
+- Armazenamento das inscrições no Supabase.
 
-Valor da inscrição:
+### Área do participante
 
-**R$ 20,00**
+O participante acessa sua área informando o e-mail cadastrado.
 
-Pagamento através de **PIX**, com recurso para copiar a chave diretamente pela interface.
+O painel apresenta:
 
-> A chave PIX utilizada em produção deve ser configurada na aplicação sem inclusão de credenciais ou dados secretos no repositório.
+- Nome e modalidade do atleta.
+- Meta total de quilômetros.
+- Quilometragem acumulada.
+- Percentual concluído.
+- Quilômetros restantes.
+- Dias restantes do desafio.
+- Posição no ranking.
+- Indicadores de ritmo.
+- Histórico de atividades.
+- Gráficos de desempenho.
+- Dicas de treino, hidratação e alimentação.
+- Compartilhamento de resultados.
 
----
+### Registro de atividades
 
-## 🏃 Área do participante
+Os atletas podem registrar seus treinos informando:
 
-O participante possui uma área própria para acompanhar o desafio.
+- Data da atividade.
+- Distância percorrida.
+- Tempo.
+- Imagem do comprovante.
 
-Entre as informações disponíveis estão:
+As atividades são encaminhadas para validação administrativa.
 
-- modalidade escolhida;
-- meta total;
-- quilômetros concluídos;
-- quilômetros restantes;
-- percentual do desafio;
-- barra de progresso;
-- histórico de atividades.
+**Status utilizados:**
 
----
+- `PENDENTE` — aguardando análise.
+- `APROVADA` — atividade validada.
+- `REJEITADA` — atividade não aceita, quando aplicável.
 
-## 📸 Registro de atividades
+Somente atividades aprovadas devem contribuir para o desempenho oficial.
 
-O participante pode registrar uma atividade informando dados como:
+### Histórico de atividades
 
-- data;
-- distância;
-- tempo;
-- comprovante da atividade.
+A seção **Minhas Atividades** apresenta:
 
-O comprovante pode ser um print de aplicativos utilizados para registrar corrida ou caminhada.
+| Informação | Descrição |
+|---|---|
+| Data | Dia do treino |
+| Distância | Quilometragem registrada |
+| Tempo | Duração informada |
+| Status | Situação da validação |
 
-Após o envio:
+A consulta utiliza a view `atividades_publicas`, criada no Supabase.
 
-```text
-Participante
-      ↓
-Envia atividade
-      ↓
-Comprovante armazenado
-      ↓
-PENDENTE
-      ↓
-Administrador analisa
-      ↓
-APROVADA ou REJEITADA
-```
+### Gráficos dinâmicos
 
-Uma atividade pendente **não altera a quilometragem oficial**.
+A plataforma utiliza **Chart.js** para apresentar a evolução esportiva dos participantes.
 
----
+**Gráfico Real × Esperado**
 
-## ✅ Validação administrativa
+Compara duas curvas:
 
-O painel administrativo permite:
+- Real: quilômetros acumulados em atividades aprovadas.
+- Esperado: evolução proporcional necessária para atingir a meta no período do desafio.
 
-- visualizar atividades pendentes;
-- consultar dados do participante;
-- visualizar o comprovante;
-- conferir distância e tempo;
-- aprovar atividade;
-- rejeitar atividade;
-- informar observações;
-- consultar atividades aprovadas;
-- consultar atividades rejeitadas.
+**Gráfico circular de progresso**
 
-Quando uma atividade é aprovada, sua distância é incorporada ao progresso oficial do participante.
+Apresenta a quilometragem aprovada em relação à meta da modalidade.
 
----
+Os gráficos utilizam os dados disponíveis no Supabase e são atualizados quando a página consulta novamente os registros.
 
-## 🔐 Área administrativa
+### Ranking
 
-O acesso administrativo utiliza autenticação através do **Supabase Auth**.
+O ranking permite acompanhar a classificação dos participantes de acordo com a quilometragem acumulada.
 
-O fluxo de autorização foi estruturado como:
+A plataforma utiliza a view `ranking_publico` para disponibilizar os dados de classificação.
 
-```text
-Login
-  ↓
-Supabase Auth
-  ↓
-Sessão autenticada
-  ↓
-Verificação em admin_users
-  ↓
-Administrador ativo
-  ↓
-Painel administrativo
-```
+### Área administrativa
 
-Usuários não autorizados não devem possuir acesso às operações administrativas.
+A administração do evento contempla funcionalidades de acompanhamento e gerenciamento de inscrições e atividades.
 
----
+Entre as operações previstas no fluxo estão:
 
-## 🔒 Segurança
+- Consultar participantes.
+- Acompanhar inscrições.
+- Analisar comprovantes.
+- Aprovar ou rejeitar atividades.
+- Acompanhar a evolução dos atletas.
+- Consultar informações de gestão do desafio.
 
-O projeto adota separação entre credenciais públicas do frontend e credenciais privilegiadas do backend.
+## 4. Regras de negócio
 
-### Frontend
+1. Cada participante deve possuir uma inscrição identificável no banco de dados.
+2. O e-mail é utilizado no fluxo atual de acesso à área do participante.
+3. Cada modalidade possui uma meta de quilômetros.
+4. Atividades pendentes não devem aumentar o desempenho oficial.
+5. A quilometragem aprovada deve ser considerada no acompanhamento do desafio.
+6. O ranking deve refletir os critérios de classificação definidos pela organização.
+7. O desempenho esperado é calculado proporcionalmente ao período oficial do desafio.
+8. A interface deve funcionar em smartphones e computadores.
 
-Pode utilizar somente configurações públicas apropriadas do Supabase.
+## 5. Estrutura do projeto
 
-### Backend
-
-Operações privilegiadas são executadas através de **Supabase Edge Functions**.
-
-Credenciais como:
-
-```text
-SUPABASE_SERVICE_ROLE_KEY
-STRAVA_CLIENT_SECRET
-```
-
-**nunca devem ser adicionadas ao código frontend ou versionadas no GitHub.**
-
----
-
-## ⚡ Edge Functions
-
-A arquitetura utiliza Supabase Edge Functions para operações que exigem processamento no backend.
-
-Entre as funções desenvolvidas estão operações relacionadas a:
-
-```text
-atividades-admin
-atividade-validar
-```
-
-Essas funções dão suporte ao fluxo administrativo de consulta e validação das atividades.
-
----
-
-## 🗄️ Banco de dados
-
-O projeto utiliza **Supabase/PostgreSQL**.
-
-Entre as estruturas utilizadas estão:
-
-### `inscricoes`
-
-Armazena os participantes e seu progresso no desafio.
-
-### `atividades`
-
-Armazena as atividades enviadas pelos participantes.
-
-### `admin_users`
-
-Controla quais usuários autenticados possuem permissão administrativa.
-
-### `strava_oauth_states`
-
-Estrutura desenvolvida durante os testes da integração OAuth com Strava.
-
-### `strava_conexoes`
-
-Estrutura destinada à integração com contas Strava.
-
----
-
-## 🟠 Integração com Strava
-
-Durante o desenvolvimento foi estudada uma integração através de OAuth com o Strava.
-
-A arquitetura prevista utiliza:
-
-```text
-Participante
-      ↓
-OAuth Strava
-      ↓
-Authorization Code
-      ↓
-Edge Function
-      ↓
-Access Token / Refresh Token
-      ↓
-Consulta de atividades
-```
-
-Para o MVP, foi adotado como fluxo principal o **envio manual do comprovante da atividade**, seguido da validação administrativa.
-
-A integração automática com Strava permanece como possibilidade de evolução futura.
-
----
-
-## 📱 PWA
-
-O projeto possui estrutura para funcionar como **Progressive Web App (PWA)**.
-
-Isso possibilita recursos como:
-
-- instalação no celular;
-- experiência semelhante a aplicativo;
-- manifest;
-- service worker;
-- melhor experiência em dispositivos móveis.
-
----
-
-## 🛠️ Tecnologias
-
-### Frontend
-
-- HTML5
-- CSS3
-- JavaScript
-- PWA
-
-### Backend / Cloud
-
-- Supabase
-- PostgreSQL
-- Supabase Auth
-- Supabase Storage
-- Supabase Edge Functions
-- Deno
-
-### Versionamento
-
-- Git
-- GitHub
-
----
-
-## 📂 Estrutura do projeto
-
-Estrutura simplificada:
+Estrutura simplificada dos principais arquivos:
 
 ```text
 desafio-virtual/
-│
 ├── index.html
+├── acesso.html
 ├── participante.html
 ├── admin-login.html
 ├── admin.html
-│
 ├── assets/
 │   ├── css/
 │   │   ├── style.css
-│   │   ├── participante.css
-│   │   ├── admin.css
-│   │   └── admin-login.css
-│   │
+│   │   └── participante.css
 │   ├── js/
-│   │   ├── app.js
+│   │   ├── supabase.js
 │   │   ├── participante.js
-│   │   ├── admin.js
-│   │   └── admin-login.js
-│   │
+│   │   └── graficos.js
 │   └── images/
-│
-├── manifest.json
-├── sw.js
 └── README.md
 ```
 
-> A estrutura pode sofrer alterações conforme a evolução do projeto.
+Outros arquivos podem existir conforme a organização atual do repositório.
 
----
-
-## 🔄 Fluxo principal
+## 6. Arquitetura
 
 ```text
-HOME
- │
- ├── Inscrição
- │      ↓
- │   Supabase
- │
- ├── Pagamento PIX
- │
- └── Área do participante
-          ↓
-     Enviar atividade
-          ↓
-       PENDENTE
-          ↓
-     Painel Admin
-       ↙      ↘
- APROVADA   REJEITADA
-     ↓
-Atualização da
-quilometragem
-     ↓
-Progresso
+             PARTICIPANTE
+                  |
+                  v
+          FRONTEND WEB
+       HTML + CSS + JavaScript
+                  |
+                  v
+          SUPABASE CLIENT
+                  |
+                  v
+        SUPABASE / POSTGRESQL
+                  |
+          +-------+-------+
+          |               |
+          v               v
+      INSCRIÇÕES       ATIVIDADES
+          |               |
+          +-------+-------+
+                  |
+                  v
+          VIEWS DE CONSULTA
+       ranking_publico
+       atividades_publicas
+                  |
+                  v
+       DASHBOARD E GRÁFICOS
 ```
 
----
+A publicação do frontend é realizada pelo Netlify.
 
-## 🚀 Executando localmente
+## 7. Banco de dados
 
-O projeto pode ser executado através de um servidor HTTP local.
+### Tabela `inscricoes`
 
-Exemplo com VS Code e Live Server:
+Armazena informações dos participantes, incluindo identificação, modalidade e quilometragem acumulada.
 
-```text
-http://localhost:5500/
+### Tabela `atividades`
+
+Armazena os registros de treinos, com informações como:
+
+- `id`
+- `inscricao_id`
+- `data_atividade`
+- `distancia_km`
+- `tempo`
+- `comprovante_url`
+- `status`
+- `observacao_admin`
+- `criado_em`
+- `validado_em`
+- `validado_por`
+
+### Views
+
+**`ranking_publico`**
+
+Disponibiliza informações utilizadas no ranking.
+
+**`atividades_publicas`**
+
+Disponibiliza informações limitadas das atividades, como nome, modalidade, data, distância, tempo e status.
+
+## 8. Segurança e privacidade
+
+O Supabase utiliza políticas de acesso por meio de Row Level Security (RLS).
+
+A plataforma deve preservar dados pessoais, comprovantes e informações administrativas contra consultas não autorizadas.
+
+**Pontos de atenção da implementação atual:**
+
+- O acesso apenas pelo e-mail não comprova a identidade do participante.
+- A view `atividades_publicas` permite consulta pública aos campos disponibilizados.
+- A identificação por nome e modalidade pode gerar conflitos entre participantes homônimos.
+- Recomenda-se adotar identificadores públicos únicos e revisar as políticas de acesso antes de ampliar a exposição de dados.
+
+Chaves administrativas e credenciais privilegiadas não devem ser incluídas no código público.
+
+## 9. Executar localmente
+
+Clone o repositório:
+
+```bash
+git clone https://github.com/mbalbuquerque/desafio-virtual.git
 ```
 
-Evite abrir os arquivos apenas com `file://`, pois funcionalidades relacionadas a módulos, PWA e APIs podem exigir contexto HTTP/HTTPS.
+Entre na pasta:
+
+```bash
+cd desafio-virtual
+```
+
+Utilize um servidor local, como a extensão Live Server do VS Code.
+
+Verifique se as configurações públicas do cliente Supabase estão corretamente definidas.
+
+Não publique chaves `service_role` ou outras credenciais administrativas no frontend.
+
+## 10. Testes recomendados
+
+### Participante
+
+- [ ] Inscrição de novo atleta.
+- [ ] Validação de e-mail duplicado.
+- [ ] Acesso à área do participante.
+- [ ] Carregamento dos indicadores.
+- [ ] Consulta do histórico de atividades.
+- [ ] Registro de novo treino.
+- [ ] Exibição de atividades pendentes.
+- [ ] Atualização após aprovação.
+- [ ] Funcionamento dos gráficos.
+- [ ] Comparação entre quilômetros reais e esperados.
+- [ ] Responsividade em smartphone.
+
+### Administração
+
+- [ ] Acesso administrativo.
+- [ ] Consulta de participantes.
+- [ ] Análise de comprovantes.
+- [ ] Aprovação de atividades.
+- [ ] Rejeição de atividades.
+- [ ] Atualização dos indicadores.
+- [ ] Consistência entre ranking, dashboard e gráficos.
+
+### Segurança
+
+- [ ] Revisar políticas RLS.
+- [ ] Verificar permissões das views públicas.
+- [ ] Impedir acesso público aos comprovantes privados.
+- [ ] Testar participantes com nomes iguais.
+- [ ] Verificar ausência de credenciais privilegiadas no repositório.
+
+## 11. Publicação
+
+**Plataforma:** Netlify
+
+**Site:** https://corraporvocedesafiovirtual.netlify.app/
+
+**Repositório:** https://github.com/mbalbuquerque/desafio-virtual
+
+Para enviar alterações:
+
+```bash
+git add .
+git commit -m "docs: atualiza README com dashboard e graficos dinamicos"
+git push origin main
+```
+
+## 12. Melhorias futuras
+
+- Identificador público único por participante.
+- Revisão de segurança do acesso individual.
+- Gráfico de desempenho semanal.
+- Filtros por período nos gráficos.
+- Exportação de relatórios.
+- Indicadores administrativos avançados.
+- Otimizações adicionais para dispositivos móveis.
+- Melhorias de acessibilidade.
+
+## 13. Status do projeto
+
+**Versão funcional em evolução.**
+
+Funcionalidades implementadas e visualizadas durante o desenvolvimento:
+
+- Inscrições e acesso do participante.
+- Dashboard de acompanhamento.
+- Histórico de atividades.
+- Ranking público.
+- Gráfico de evolução real × esperado.
+- Gráfico circular de progresso.
+
+A conclusão definitiva depende da validação integrada dos dados, dos testes de segurança e do QA final.
 
 ---
 
-## ⚠️ Configuração
+**Corra Por Você — Desafio Virtual**
 
-Antes de executar o projeto, configure corretamente as informações públicas necessárias para conexão com o Supabase.
-
-Nunca publique:
-
-- Service Role Key;
-- Client Secret;
-- senhas administrativas;
-- tokens OAuth;
-- arquivos `.env` contendo secrets.
-
----
-
-## 🧪 Fluxos testados
-
-Durante o desenvolvimento foram realizados testes de:
-
-- criação de inscrição;
-- validação de campos;
-- bloqueio de e-mail duplicado;
-- armazenamento no Supabase;
-- acesso à área do participante;
-- envio de atividade;
-- upload de comprovante;
-- listagem administrativa;
-- visualização do comprovante;
-- aprovação de atividade;
-- atualização do status;
-- autenticação administrativa.
-
----
-
-## 🗺️ Roadmap
-
-Possíveis evoluções:
-
-- [ ] Integração automática com Strava
-- [ ] Ranking dinâmico
-- [ ] Estatísticas do desafio
-- [ ] Dashboard com indicadores adicionais
-- [ ] Notificações ao participante
-- [ ] Recuperação de acesso
-- [ ] Melhorias na auditoria administrativa
-- [ ] Relatórios
-- [ ] Melhorias adicionais de segurança
-- [ ] Automação da confirmação de pagamento
-
----
-
-## 📌 Status
-
-**MVP em fase de lançamento.**
-
-O fluxo principal de inscrição e registro/validação manual de atividades encontra-se funcional.
-
----
-
-## 👨‍💻 Desenvolvimento
-
-Projeto desenvolvido por **Marcelo Barbosa**.
-
-GitHub:
-
-https://github.com/mbalbuquerque
-
----
-
-## 📄 Licença
-
-Projeto desenvolvido para gerenciamento do desafio virtual **Corra Por Você**.
-
-O uso, reprodução ou distribuição deve respeitar as condições definidas pelo responsável pelo projeto.
+*Cada quilômetro conta. Cada conquista começa com você.*
