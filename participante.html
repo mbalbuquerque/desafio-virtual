@@ -362,6 +362,29 @@
         </section>
 
 
+
+<!-- GRÁFICOS DE DESEMPENHO -->
+<section class="participant-section performance-charts" id="performanceCharts"
+         data-start-date="2026-10-05" data-end-date="2026-12-31">
+  <div class="section-heading">
+    <div><span class="eyebrow">DESEMPENHO</span><h2>Evolução do desafio</h2></div>
+  </div>
+  <div class="charts-grid">
+    <article class="chart-panel chart-panel-line">
+      <h3>Real × esperado</h3>
+      <p>Quilometragem acumulada dos treinos aprovados versus ritmo necessário.</p>
+      <div class="chart-canvas-wrap"><canvas id="evolutionChart" aria-label="Evolução real e esperada em quilômetros" role="img"></canvas></div>
+    </article>
+    <article class="chart-panel chart-panel-goal">
+      <h3>Progresso da meta</h3>
+      <p>Distância aprovada em relação à modalidade.</p>
+      <div class="chart-doughnut-wrap"><canvas id="goalChart" aria-label="Percentual concluído da meta" role="img"></canvas></div>
+      <p id="goalChartSummary" class="chart-summary">Carregando...</p>
+    </article>
+  </div>
+  <p id="chartsMessage" class="charts-message" role="status" aria-live="polite"></p>
+</section>
+
         <!-- =========================================
      ATIVIDADES
 ========================================== -->
@@ -756,10 +779,12 @@
 <script
     src="assets/js/supabase.js"
 ></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.5.1/dist/chart.umd.min.js"></script>
 <script
+
     src="assets/js/participante.js"
 ></script>
+<script src="assets/js/graficos.js" defer></script>
 
 
 </body>

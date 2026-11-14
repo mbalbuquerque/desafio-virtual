@@ -1332,3 +1332,82 @@
     margin: 0;
     opacity: 0.7;
 }
+
+/* =====================================================
+   CORRA POR VOCÊ
+   GRÁFICOS DE DESEMPENHO
+===================================================== */
+
+.charts-grid {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 2fr)
+        minmax(260px, 1fr);
+    gap: 18px;
+}
+
+.chart-panel {
+    min-width: 0;
+    padding: 24px;
+
+    border: 1px solid rgba(255, 255, 255, .09);
+    border-radius: 20px;
+
+    background: #0a2035;
+}
+
+.chart-panel h3 {
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+    color: #ffffff;
+}
+
+.chart-panel p {
+    margin: 0 0 18px;
+    color: #9eacba;
+    font-size: .88rem;
+    line-height: 1.5;
+}
+
+.chart-canvas-wrap {
+    position: relative;
+    height: 310px;
+}
+
+.chart-doughnut-wrap {
+    position: relative;
+    height: 245px;
+}
+
+.chart-panel .chart-summary {
+    margin: 14px 0 0;
+    text-align: center;
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.charts-message {
+    margin: 12px 0 0;
+    color: #a9bdd1;
+    font-size: .85rem;
+}
+
+/* TABLETS */
+
+@media (max-width: 800px) {
+    .charts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* SMARTPHONES */
+
+@media (max-width: 620px) {
+    .chart-panel {
+        padding: 18px;
+    }
+
+    .chart-canvas-wrap {
+        height: 270px;
+    }
+}
